@@ -1,508 +1,567 @@
 <!DOCTYPE html>
-<html lang="en-IN">
+<html lang="en-IN" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EBCA Membership & Sponsorship | East Bengaluru Cultural Association</title>
-<meta name="description" content="Join or renew your EBCA membership, or partner as a sponsor. East Bengaluru Cultural Association (EBCA) - Whitefield, Bengaluru. Dharma · Sanskriti · Samuhik Anand.">
-<meta property="og:title" content="EBCA Membership & Sponsorship">
-<meta property="og:description" content="Become part of the EBCA Parivaar. Join, renew or sponsor Bangalore's largest Durga Puja celebration.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>EBCA Companion — Membership, Sponsorship & Seva | East Bengaluru Cultural Association</title>
+<meta name="description" content="The EBCA Companion app: join or renew your membership, partner as a sponsor, or make a seva offering. East Bengaluru Cultural Association, Whitefield, Bengaluru.">
 <meta name="theme-color" content="#7a0f1e">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="EBCA">
+<meta property="og:title" content="EBCA Companion — Join, Sponsor, Seva">
+<meta property="og:description" content="Membership, sponsorship and seva for East Bengaluru Cultural Association.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%237a0f1e'/><text y='72' x='50' text-anchor='middle' font-size='62' fill='%23f0c24b' font-family='serif'>&#2482;</text></svg>">
 <style>
-  :root{
-    --maroon:#6d0d1c;
-    --maroon-2:#8f1428;
-    --crimson:#b3182f;
-    --gold:#d4a017;
-    --gold-2:#f0c24b;
-    --gold-soft:#f7e3b0;
-    --cream:#fdf6ec;
-    --cream-2:#f8ecdb;
-    --ink:#2a1418;
-    --ink-soft:#5b4a4d;
-    --green:#0f7b52;
-    --white:#ffffff;
-    --shadow:0 18px 44px -18px rgba(109,13,28,.45);
-    --shadow-sm:0 8px 24px -12px rgba(109,13,28,.35);
-    --radius:20px;
-    --maxw:1160px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
-    color:var(--ink);
-    background:var(--cream);
-    line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  .bn{font-family:'Tiro Bangla',serif}
-  img{max-width:100%;display:block}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
-  section{padding:74px 0;position:relative}
-  h1,h2,h3{line-height:1.2;letter-spacing:-.02em}
-  h2.section-title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;margin-bottom:12px}
-  .eyebrow{
-    display:inline-block;font-size:.78rem;font-weight:600;letter-spacing:.18em;
-    text-transform:uppercase;color:var(--crimson);margin-bottom:14px;
-  }
-  .lead{color:var(--ink-soft);font-size:1.05rem;max-width:62ch}
-  .center{text-align:center}
-  .center .lead{margin-left:auto;margin-right:auto}
-  .divider{width:74px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--gold),var(--crimson));margin:16px 0 26px}
-  .center .divider{margin-left:auto;margin-right:auto}
+/* ============================= TOKENS ============================= */
+:root{
+  --bg:#fbf7f0; --bg-2:#f4ece0; --surface:#ffffff; --surface-2:#fffdf9;
+  --text:#241418; --muted:#6b585b; --border:rgba(109,13,28,.13);
+  --brand:#7a0f1e; --brand-2:#a5142c; --brand-soft:rgba(122,15,30,.07);
+  --gold:#d4a017; --gold-2:#f0c24b; --gold-soft:#f7e3b0;
+  --green:#0f7b52; --wa:#1faf54;
+  --shadow:0 20px 50px -22px rgba(109,13,28,.45);
+  --shadow-sm:0 10px 26px -14px rgba(109,13,28,.35);
+  --glass:rgba(255,255,255,.72);
+  --radius:22px; --maxw:1180px;
+  --nav-h:66px;
+  --hero-1:#7a0f1e; --hero-2:#4d0913;
+}
+[data-theme="dark"]{
+  --bg:#131010; --bg-2:#1a1514; --surface:#211a19; --surface-2:#271f1d;
+  --text:#f7f0e7; --muted:#bdaca4; --border:rgba(240,194,75,.16);
+  --brand:#c8354f; --brand-2:#e0485f; --brand-soft:rgba(240,194,75,.08);
+  --gold:#e8b73a; --gold-2:#f4cd63; --gold-soft:#5a4413;
+  --green:#39c48d;
+  --shadow:0 20px 50px -22px rgba(0,0,0,.75);
+  --shadow-sm:0 10px 26px -14px rgba(0,0,0,.6);
+  --glass:rgba(28,22,21,.78);
+  --hero-1:#5e0b18; --hero-2:#2a060c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  background:var(--bg); color:var(--text); line-height:1.65;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  transition:background .3s ease,color .3s ease;
+}
+.bn{font-family:'Tiro Bangla',serif}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+section{padding:78px 0;position:relative}
+h1,h2,h3{line-height:1.18;letter-spacing:-.022em}
+h2.section-title{font-size:clamp(1.75rem,4vw,2.7rem);font-weight:700;margin-bottom:12px}
+.eyebrow{display:inline-block;font-size:.76rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--brand-2);margin-bottom:14px}
+.lead{color:var(--muted);font-size:1.04rem;max-width:64ch}
+.center{text-align:center}
+.center .lead{margin-left:auto;margin-right:auto}
+.divider{width:74px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--gold),var(--brand-2));margin:16px 0 26px}
+.center .divider{margin-left:auto;margin-right:auto}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:0;background:var(--brand);color:#fff;padding:12px 18px;border-radius:0 0 12px 0;z-index:300}
+.skip:focus{left:0}
 
-  /* ---------- Top bar ---------- */
-  header.topbar{
-    position:sticky;top:0;z-index:60;
-    background:rgba(109,13,28,.92);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid rgba(240,194,75,.35);
-    color:#fff;
-  }
-  .topbar .wrap{display:flex;align-items:center;gap:18px;height:66px}
-  .brand{display:flex;align-items:center;gap:12px;font-weight:700}
-  .logo{
-    width:40px;height:40px;border-radius:11px;flex:0 0 auto;
-    background:radial-gradient(circle at 30% 25%,var(--gold-2),var(--gold) 60%,#a97a0d);
-    display:grid;place-items:center;color:var(--maroon);font-weight:800;font-size:1.02rem;
-    box-shadow:inset 0 0 0 2px rgba(255,255,255,.35);
-    font-family:'Tiro Bangla',serif;
-  }
-  .brand small{display:block;font-weight:400;font-size:.68rem;letter-spacing:.06em;opacity:.85;line-height:1.1}
-  .brand b{font-size:1rem;letter-spacing:.02em}
-  nav.main{margin-left:auto;display:flex;align-items:center;gap:4px}
-  nav.main a{
-    padding:8px 13px;border-radius:10px;font-size:.9rem;font-weight:500;color:rgba(255,255,255,.9);
-    transition:.2s;
-  }
-  nav.main a:hover{background:rgba(255,255,255,.12);color:#fff}
-  .nav-cta{
-    background:linear-gradient(135deg,var(--gold-2),var(--gold));color:var(--maroon)!important;
-    font-weight:700!important;padding:9px 18px!important;border-radius:12px!important;
-    box-shadow:0 6px 18px -8px rgba(240,194,75,.9);
-  }
-  .menu-btn{display:none;margin-left:auto;background:none;border:0;color:#fff;font-size:1.6rem;cursor:pointer;line-height:1}
-  @media(max-width:900px){
-    nav.main{
-      position:absolute;top:66px;left:0;right:0;flex-direction:column;align-items:stretch;
-      background:var(--maroon);padding:10px 16px 18px;gap:2px;
-      max-height:0;overflow:hidden;transition:max-height .3s ease;border-bottom:1px solid rgba(240,194,75,.3);
-    }
-    nav.main.open{max-height:420px}
-    nav.main a{padding:13px 10px}
-    .menu-btn{display:block}
-    .nav-cta{text-align:center;margin-top:8px}
-  }
+/* ============================= SCROLL PROGRESS ============================= */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:120;
+  background:linear-gradient(90deg,var(--gold),var(--brand-2));transition:width .1s linear}
 
-  /* ---------- Hero ---------- */
-  .hero{
-    background:
-      radial-gradient(1200px 500px at 80% -10%,rgba(240,194,75,.22),transparent 60%),
-      radial-gradient(900px 500px at 0% 100%,rgba(179,24,47,.35),transparent 60%),
-      linear-gradient(160deg,var(--maroon) 0%,#570a15 100%);
-    color:#fff;overflow:hidden;
-  }
-  .hero::after{
-    content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
-    background-image:radial-gradient(rgba(240,194,75,.35) 1px,transparent 1px);
-    background-size:26px 26px;
-    mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 85%);
-  }
-  .hero .wrap{position:relative;z-index:2;padding-top:70px;padding-bottom:78px}
-  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:center}
-  @media(max-width:940px){.hero-grid{grid-template-columns:1fr;gap:38px}}
-  .pill{
-    display:inline-flex;align-items:center;gap:9px;background:rgba(240,194,75,.15);
-    border:1px solid rgba(240,194,75,.45);color:var(--gold-soft);
-    padding:7px 15px;border-radius:999px;font-size:.8rem;font-weight:500;margin-bottom:22px;
-  }
-  .hero h1{font-size:clamp(2rem,5.2vw,3.5rem);font-weight:800;margin-bottom:18px}
-  .hero h1 .accent{
-    background:linear-gradient(120deg,var(--gold-2),#fff3cf);-webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .hero p.hero-sub{font-size:1.08rem;color:rgba(255,255,255,.86);max-width:56ch;margin-bottom:30px}
-  .cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
-  .btn{
-    display:inline-flex;align-items:center;gap:9px;justify-content:center;
-    padding:14px 26px;border-radius:14px;font-weight:600;font-size:.98rem;cursor:pointer;border:0;
-    transition:transform .18s ease,box-shadow .18s ease,background .18s;font-family:inherit;
-  }
-  .btn:active{transform:translateY(1px) scale(.99)}
-  .btn-gold{background:linear-gradient(135deg,var(--gold-2),var(--gold));color:var(--maroon);box-shadow:0 12px 30px -12px rgba(240,194,75,.95)}
-  .btn-gold:hover{transform:translateY(-2px)}
-  .btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5)}
-  .btn-ghost:hover{background:rgba(255,255,255,.12)}
-  .btn-maroon{background:var(--maroon);color:#fff;box-shadow:var(--shadow-sm)}
-  .btn-maroon:hover{background:var(--maroon-2)}
-  .btn-wa{background:#1faf54;color:#fff;box-shadow:0 12px 30px -14px rgba(31,175,84,.95)}
-  .btn-wa:hover{background:#189a49}
-  .btn-outline{background:#fff;color:var(--maroon);border:1.5px solid rgba(109,13,28,.2)}
-  .btn-outline:hover{border-color:var(--maroon)}
-  .btn-block{width:100%}
+/* ============================= HEADER ============================= */
+header.topbar{
+  position:sticky;top:0;z-index:100;background:var(--glass);
+  backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);
+  border-bottom:1px solid var(--border);
+}
+.topbar .wrap{display:flex;align-items:center;gap:16px;height:var(--nav-h)}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700}
+.logo{width:40px;height:40px;border-radius:12px;flex:0 0 auto;display:grid;place-items:center;
+  background:radial-gradient(circle at 30% 25%,var(--gold-2),var(--gold) 62%,#a97a0d);
+  color:#5e0b18;font-weight:800;font-size:1.05rem;font-family:'Tiro Bangla',serif;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
+.brand small{display:block;font-weight:400;font-size:.66rem;letter-spacing:.05em;color:var(--muted);line-height:1.15}
+.brand b{font-size:.98rem;letter-spacing:.02em}
+nav.main{margin-left:auto;display:flex;align-items:center;gap:2px}
+nav.main a{padding:8px 12px;border-radius:10px;font-size:.89rem;font-weight:500;color:var(--muted);transition:.18s}
+nav.main a:hover{background:var(--brand-soft);color:var(--text)}
+.nav-cta{background:linear-gradient(135deg,var(--gold-2),var(--gold));color:#5e0b18!important;font-weight:700!important;padding:9px 17px!important;border-radius:12px!important;box-shadow:0 6px 18px -9px rgba(240,194,75,.95)}
+.icon-btn{width:40px;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--surface);
+  color:var(--text);cursor:pointer;display:grid;place-items:center;font-size:1.05rem;transition:.18s;flex:0 0 auto}
+.icon-btn:hover{background:var(--brand-soft);border-color:var(--gold)}
+.menu-btn{display:none}
+@media(max-width:940px){
+  nav.main{position:absolute;top:var(--nav-h);left:0;right:0;flex-direction:column;align-items:stretch;
+    background:var(--surface);padding:10px 16px 18px;gap:2px;border-bottom:1px solid var(--border);
+    max-height:0;overflow:hidden;transition:max-height .32s ease;box-shadow:var(--shadow-sm)}
+  nav.main.open{max-height:520px;overflow:auto}
+  nav.main a{padding:13px 10px;color:var(--text)}
+  .menu-btn{display:grid}
+}
 
-  /* hero card */
-  .hero-card{
-    background:rgba(255,255,255,.07);border:1px solid rgba(240,194,75,.35);
-    border-radius:26px;padding:30px;backdrop-filter:blur(6px);
-    box-shadow:var(--shadow);
-  }
-  .hero-card h3{font-size:1.15rem;margin-bottom:6px;color:var(--gold-soft)}
-  .hero-card .hint{font-size:.85rem;color:rgba(255,255,255,.7);margin-bottom:20px}
-  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .stat{background:rgba(0,0,0,.18);border-radius:15px;padding:16px;border:1px solid rgba(255,255,255,.08)}
-  .stat b{display:block;font-size:1.55rem;font-weight:800;color:#fff;line-height:1.1}
-  .stat span{font-size:.76rem;color:rgba(255,255,255,.72);letter-spacing:.03em}
-  .hero-strip{
-    display:flex;flex-wrap:wrap;gap:12px 26px;margin-top:30px;padding-top:24px;
-    border-top:1px solid rgba(255,255,255,.16);font-size:.86rem;color:rgba(255,255,255,.82);
-  }
-  .hero-strip span{display:inline-flex;align-items:center;gap:8px}
+/* ============================= BUTTONS ============================= */
+.btn{display:inline-flex;align-items:center;gap:9px;justify-content:center;padding:14px 25px;border-radius:14px;
+  font-weight:600;font-size:.96rem;cursor:pointer;border:0;transition:transform .18s,box-shadow .18s,background .18s;text-align:center}
+.btn:active{transform:translateY(1px) scale(.99)}
+.btn-gold{background:linear-gradient(135deg,var(--gold-2),var(--gold));color:#5e0b18;box-shadow:0 12px 30px -13px rgba(240,194,75,.95)}
+.btn-gold:hover{transform:translateY(-2px)}
+.btn-brand{background:linear-gradient(135deg,var(--brand-2),var(--brand));color:#fff;box-shadow:var(--shadow-sm)}
+.btn-brand:hover{transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:currentColor;border:1.5px solid currentColor;opacity:.92}
+.btn-ghost:hover{opacity:1}
+.btn-outline{background:var(--surface);color:var(--text);border:1.5px solid var(--border)}
+.btn-outline:hover{border-color:var(--gold)}
+.btn-wa{background:var(--wa);color:#fff;box-shadow:0 12px 30px -14px rgba(31,175,84,.9)}
+.btn-wa:hover{background:#189a49}
+.btn-sm{padding:11px 18px;font-size:.88rem;border-radius:12px}
+.btn-block{width:100%}
 
-  /* ---------- Trust bar ---------- */
-  .trust{background:var(--maroon);color:#fff;padding:0}
-  .trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding-top:26px;padding-bottom:26px}
-  @media(max-width:760px){.trust .wrap{grid-template-columns:1fr 1fr;gap:20px}}
-  .trust .t{text-align:center;padding:6px 10px}
-  .trust .t b{display:block;font-size:1.7rem;font-weight:800;color:var(--gold-2);line-height:1.1}
-  .trust .t span{font-size:.8rem;color:rgba(255,255,255,.8)}
+/* ============================= HERO ============================= */
+.hero{background:
+    radial-gradient(1100px 480px at 82% -12%,rgba(240,194,75,.20),transparent 62%),
+    radial-gradient(900px 520px at -5% 108%,rgba(179,24,47,.42),transparent 60%),
+    linear-gradient(158deg,var(--hero-1) 0%,var(--hero-2) 100%);
+  color:#fff;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.45;
+  background-image:radial-gradient(rgba(240,194,75,.4) 1px,transparent 1px);background-size:27px 27px;
+  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 86%);
+  mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 86%)}
+.hero .wrap{position:relative;z-index:2;padding-top:64px;padding-bottom:72px}
+.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:52px;align-items:center}
+@media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:36px}}
+.pill{display:inline-flex;align-items:center;gap:9px;background:rgba(240,194,75,.15);border:1px solid rgba(240,194,75,.45);
+  color:var(--gold-soft);padding:7px 15px;border-radius:999px;font-size:.79rem;font-weight:500;margin-bottom:20px}
+[data-theme="dark"] .pill{color:var(--gold-2)}
+.hero h1{font-size:clamp(2rem,5.2vw,3.5rem);font-weight:800;margin-bottom:18px}
+.hero h1 .accent{background:linear-gradient(120deg,var(--gold-2),#fff5d6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.hero-sub{font-size:1.06rem;color:rgba(255,255,255,.87);max-width:56ch;margin-bottom:28px}
+.cta-row{display:flex;flex-wrap:wrap;gap:13px;align-items:center}
+.hero-strip{display:flex;flex-wrap:wrap;gap:11px 24px;margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,.16);
+  font-size:.85rem;color:rgba(255,255,255,.84)}
+.hero-card{background:rgba(255,255,255,.08);border:1px solid rgba(240,194,75,.35);border-radius:26px;padding:28px;
+  backdrop-filter:blur(8px);box-shadow:var(--shadow)}
+.hero-card h3{font-size:1.08rem;color:var(--gold-2);margin-bottom:14px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.stat{background:rgba(0,0,0,.2);border-radius:15px;padding:15px;border:1px solid rgba(255,255,255,.09)}
+.stat b{display:block;font-size:1.5rem;font-weight:800;color:#fff;line-height:1.1}
+.stat span{font-size:.74rem;color:rgba(255,255,255,.74);letter-spacing:.02em}
+.count-card{margin-top:18px;background:linear-gradient(135deg,rgba(240,194,75,.22),rgba(240,194,75,.07));
+  border:1px solid rgba(240,194,75,.4);border-radius:16px;padding:16px 18px}
+.count-card .cc-label{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
+.count-row{display:flex;gap:10px;margin-top:10px}
+.count-row div{flex:1;text-align:center;background:rgba(0,0,0,.25);border-radius:11px;padding:9px 4px}
+.count-row b{display:block;font-size:1.25rem;font-weight:800;color:#fff;line-height:1}
+.count-row span{font-size:.66rem;color:rgba(255,255,255,.7);letter-spacing:.06em}
+.cc-done{font-size:.92rem;color:rgba(255,255,255,.9);margin-top:6px}
 
-  /* ---------- Cards / benefits ---------- */
-  .benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px}
-  @media(max-width:860px){.benefits{grid-template-columns:1fr}}
-  .b-card{
-    background:#fff;border-radius:var(--radius);padding:30px 26px;border:1px solid rgba(109,13,28,.08);
-    box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s;
-  }
-  .b-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-  .b-icon{
-    width:54px;height:54px;border-radius:15px;display:grid;place-items:center;font-size:1.5rem;
-    background:linear-gradient(135deg,var(--gold-soft),#fff);margin-bottom:16px;border:1px solid rgba(212,160,23,.35);
-  }
-  .b-card h3{font-size:1.15rem;margin-bottom:8px}
-  .b-card p{color:var(--ink-soft);font-size:.94rem}
+/* ============================= TRUST STRIP ============================= */
+.trust{background:var(--brand);color:#fff;padding:0}
+[data-theme="dark"] .trust{background:#2a060c}
+.trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:24px 22px}
+@media(max-width:760px){.trust .wrap{grid-template-columns:1fr 1fr;gap:18px}}
+.trust .t{text-align:center;padding:6px 10px}
+.trust .t b{display:block;font-size:1.6rem;font-weight:800;color:var(--gold-2);line-height:1.1}
+.trust .t span{font-size:.78rem;color:rgba(255,255,255,.82)}
 
-  /* ---------- Plans ---------- */
-  .plans{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:38px;max-width:880px;margin-left:auto;margin-right:auto}
-  @media(max-width:760px){.plans{grid-template-columns:1fr}}
-  .plan{
-    background:#fff;border-radius:24px;padding:34px 30px;border:1.5px solid rgba(109,13,28,.12);
-    box-shadow:var(--shadow-sm);position:relative;display:flex;flex-direction:column;
-  }
-  .plan.featured{border:2px solid var(--gold);box-shadow:var(--shadow)}
-  .plan .tag{
-    position:absolute;top:-13px;left:50%;transform:translateX(-50%);
-    background:linear-gradient(135deg,var(--gold-2),var(--gold));color:var(--maroon);
-    font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-    padding:6px 16px;border-radius:999px;white-space:nowrap;box-shadow:var(--shadow-sm);
-  }
-  .plan h3{font-size:1.35rem;margin-bottom:4px}
-  .plan .who{font-size:.85rem;color:var(--ink-soft);margin-bottom:18px}
-  .plan .price{font-size:2.5rem;font-weight:800;color:var(--maroon);line-height:1}
-  .plan .price small{font-size:.9rem;font-weight:500;color:var(--ink-soft)}
-  .plan ul{list-style:none;margin:22px 0 26px;display:grid;gap:11px}
-  .plan li{display:flex;gap:11px;font-size:.93rem;color:var(--ink-soft);align-items:flex-start}
-  .plan li::before{
-    content:"✓";flex:0 0 auto;width:20px;height:20px;border-radius:50%;
-    background:rgba(15,123,82,.12);color:var(--green);font-size:.75rem;font-weight:800;
-    display:grid;place-items:center;margin-top:2px;
-  }
-  .plan .btn{margin-top:auto}
+/* ============================= CARDS ============================= */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:34px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:34px}
+@media(max-width:920px){.grid-3,.grid-4{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.grid-3,.grid-4,.grid-2{grid-template-columns:1fr}}
+.card{background:var(--surface);border-radius:var(--radius);padding:28px 26px;border:1px solid var(--border);
+  box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s,border-color .2s}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:rgba(212,160,23,.5)}
+.card h3{font-size:1.13rem;margin-bottom:8px}
+.card p{color:var(--muted);font-size:.93rem}
+.card .ic{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;font-size:1.45rem;margin-bottom:15px;
+  background:linear-gradient(135deg,var(--gold-soft),var(--surface));border:1px solid rgba(212,160,23,.35)}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px;justify-content:center}
+.chip{background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:8px 15px;font-size:.83rem;color:var(--muted)}
 
-  /* ---------- Form ---------- */
-  .form-shell{
-    background:#fff;border-radius:26px;border:1px solid rgba(109,13,28,.1);
-    box-shadow:var(--shadow);overflow:hidden;margin-top:38px;
-  }
-  .form-head{
-    background:linear-gradient(135deg,var(--maroon),#570a15);color:#fff;padding:28px 32px;
-  }
-  .form-head h3{font-size:1.4rem;margin-bottom:5px}
-  .form-head p{font-size:.9rem;color:rgba(255,255,255,.78)}
-  .form-body{padding:30px 32px 34px}
-  @media(max-width:600px){.form-head,.form-body{padding-left:20px;padding-right:20px}}
-  .seg{display:flex;gap:8px;background:var(--cream-2);padding:6px;border-radius:14px;margin-bottom:26px}
-  .seg button{
-    flex:1;padding:11px;border:0;background:transparent;border-radius:10px;font-family:inherit;
-    font-weight:600;font-size:.9rem;color:var(--ink-soft);cursor:pointer;transition:.2s;
-  }
-  .seg button.active{background:#fff;color:var(--maroon);box-shadow:var(--shadow-sm)}
-  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  @media(max-width:640px){.field-row{grid-template-columns:1fr}}
-  .field{margin-bottom:18px}
-  .field label{display:block;font-size:.85rem;font-weight:600;margin-bottom:7px}
-  .field label .req{color:var(--crimson)}
-  .field input,.field select,.field textarea{
-    width:100%;padding:12px 14px;border:1.5px solid rgba(109,13,28,.16);border-radius:12px;
-    font-family:inherit;font-size:.95rem;background:#fffdf9;color:var(--ink);transition:.18s;
-  }
-  .field input:focus,.field select:focus,.field textarea:focus{
-    outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,160,23,.15);background:#fff;
-  }
-  .field .err{color:var(--crimson);font-size:.78rem;margin-top:5px;display:none}
-  .field.invalid input,.field.invalid select{border-color:var(--crimson);background:#fff6f7}
-  .field.invalid .err{display:block}
-  .members-box{background:var(--cream);border:1px dashed rgba(109,13,28,.25);border-radius:14px;padding:18px;margin-bottom:18px;display:none}
-  .members-box.show{display:block}
-  .members-box h4{font-size:.95rem;margin-bottom:4px}
-  .members-box .sub{font-size:.8rem;color:var(--ink-soft);margin-bottom:14px}
-  .member-row{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;margin-bottom:10px}
-  @media(max-width:600px){.member-row{grid-template-columns:1fr 1fr;gap:8px}}
-  .member-row input{padding:10px 12px;font-size:.88rem}
-  .rm{
-    border:0;background:#fdecef;color:var(--crimson);border-radius:10px;width:38px;cursor:pointer;
-    font-size:1.1rem;font-weight:700;transition:.2s;
-  }
-  .rm:hover{background:#f9d5db}
-  .add-member{
-    background:none;border:1.5px dashed rgba(109,13,28,.35);color:var(--maroon);
-    padding:9px 16px;border-radius:11px;font-family:inherit;font-weight:600;font-size:.85rem;cursor:pointer;transition:.2s;
-  }
-  .add-member:hover{background:rgba(109,13,28,.05)}
-  .summary{
-    background:linear-gradient(135deg,#fff8e8,#fdefd3);border:1px solid rgba(212,160,23,.45);
-    border-radius:16px;padding:20px 22px;margin:6px 0 22px;
-  }
-  .summary .s-row{display:flex;justify-content:space-between;gap:14px;font-size:.92rem;padding:6px 0}
-  .summary .s-row.total{border-top:1px dashed rgba(109,13,28,.25);margin-top:8px;padding-top:12px;font-weight:700;font-size:1.08rem;color:var(--maroon)}
-  .form-actions{display:flex;flex-wrap:wrap;gap:12px}
-  .form-actions .btn{flex:1 1 200px}
-  .pay-panel{
-    display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
-    background:linear-gradient(135deg,var(--maroon),#570a15);color:#fff;
-    border-radius:16px;padding:18px 22px;margin:0 0 20px;
-  }
-  .pay-panel .pp-text{display:flex;flex-direction:column;gap:2px;min-width:200px}
-  .pay-panel .pp-text b{font-size:1rem;color:var(--gold-2)}
-  .pay-panel .pp-text span{font-size:.83rem;color:rgba(255,255,255,.8)}
-  .pay-panel .btn{flex:0 0 auto}
-  .note{font-size:.8rem;color:var(--ink-soft);margin-top:16px;display:flex;gap:9px;align-items:flex-start}
-  .toast{
-    position:fixed;left:50%;bottom:26px;transform:translate(-50%,120%);z-index:200;
-    background:var(--ink);color:#fff;padding:13px 22px;border-radius:12px;font-size:.9rem;font-weight:500;
-    box-shadow:var(--shadow);transition:transform .3s cubic-bezier(.2,.9,.3,1.2);max-width:90vw;
-  }
-  .toast.show{transform:translate(-50%,0)}
+/* ============================= PLANS ============================= */
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px;max-width:900px;margin-left:auto;margin-right:auto}
+@media(max-width:780px){.plans{grid-template-columns:1fr}}
+.plan{background:var(--surface);border-radius:24px;padding:34px 30px;border:1.5px solid var(--border);
+  box-shadow:var(--shadow-sm);position:relative;display:flex;flex-direction:column}
+.plan.featured{border:2px solid var(--gold);box-shadow:var(--shadow)}
+.plan .tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold-2),var(--gold));
+  color:#5e0b18;font-size:.71rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border-radius:999px;
+  white-space:nowrap;box-shadow:var(--shadow-sm)}
+.plan h3{font-size:1.32rem;margin-bottom:4px}
+.plan .who{font-size:.84rem;color:var(--muted);margin-bottom:16px}
+.plan .price{font-size:2.45rem;font-weight:800;color:var(--brand-2);line-height:1}
+.plan .price small{font-size:.88rem;font-weight:500;color:var(--muted)}
+.plan ul{list-style:none;margin:20px 0 24px;display:grid;gap:10px}
+.plan li{display:flex;gap:10px;font-size:.92rem;color:var(--muted);align-items:flex-start}
+.plan li::before{content:"✓";flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:rgba(15,123,82,.14);
+  color:var(--green);font-size:.74rem;font-weight:800;display:grid;place-items:center;margin-top:2px}
+.plan .btn{margin-top:auto}
 
-  /* ---------- Sponsors ---------- */
-  .sponsor-sec{background:linear-gradient(165deg,#2a1418,#3d1018 60%,#2a1418);color:#fff}
-  .sponsor-sec .eyebrow{color:var(--gold-2)}
-  .sponsor-sec h2.section-title{color:#fff}
-  .sponsor-sec .lead{color:rgba(255,255,255,.8)}
-  .impact{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:40px 0 10px}
-  @media(max-width:760px){.impact{grid-template-columns:1fr 1fr}}
-  .impact .i{background:rgba(255,255,255,.06);border:1px solid rgba(240,194,75,.25);border-radius:18px;padding:22px 18px;text-align:center}
-  .impact .i b{display:block;font-size:1.9rem;font-weight:800;color:var(--gold-2);line-height:1.1}
-  .impact .i span{font-size:.8rem;color:rgba(255,255,255,.75)}
-  .tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:42px}
-  @media(max-width:980px){.tiers{grid-template-columns:1fr 1fr}}
-  @media(max-width:560px){.tiers{grid-template-columns:1fr}}
-  .tier{
-    background:rgba(255,255,255,.05);border:1px solid rgba(240,194,75,.3);border-radius:20px;
-    padding:26px 22px;display:flex;flex-direction:column;transition:transform .2s,border-color .2s;
-  }
-  .tier:hover{transform:translateY(-4px);border-color:var(--gold-2)}
-  .tier .tname{font-family:'Tiro Bangla',serif;font-size:1.25rem;color:var(--gold-2);margin-bottom:2px}
-  .tier .tprice{font-size:1.05rem;font-weight:700;margin-bottom:14px}
-  .tier ul{list-style:none;display:grid;gap:9px;font-size:.85rem;color:rgba(255,255,255,.82);margin-bottom:20px}
-  .tier li{display:flex;gap:9px;align-items:flex-start}
-  .tier li::before{content:"✦";color:var(--gold-2);flex:0 0 auto}
-  .tier .btn{margin-top:auto;font-size:.88rem;padding:11px 18px}
+/* ============================= FORM ============================= */
+.form-shell{background:var(--surface);border-radius:26px;border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;margin-top:36px}
+.form-head{background:linear-gradient(135deg,var(--hero-1),var(--hero-2));color:#fff;padding:26px 30px}
+.form-head h3{font-size:1.32rem;margin-bottom:4px}
+.form-head p{font-size:.88rem;color:rgba(255,255,255,.78)}
+.form-body{padding:28px 30px 32px}
+@media(max-width:620px){.form-head,.form-body{padding-left:18px;padding-right:18px}}
+.seg{display:flex;gap:8px;background:var(--bg-2);padding:6px;border-radius:14px;margin-bottom:24px}
+.seg button{flex:1;padding:11px;border:0;background:transparent;border-radius:10px;font-weight:600;font-size:.89rem;color:var(--muted);cursor:pointer;transition:.2s}
+.seg button.active{background:var(--surface);color:var(--brand-2);box-shadow:var(--shadow-sm)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:660px){.field-row{grid-template-columns:1fr}}
+.field{margin-bottom:17px}
+.field label{display:block;font-size:.84rem;font-weight:600;margin-bottom:7px}
+.field label .req{color:var(--brand-2)}
+.field input,.field select,.field textarea{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:12px;
+  font-family:inherit;font-size:.95rem;background:var(--surface-2);color:var(--text);transition:.18s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,160,23,.16)}
+.field .err{color:var(--brand-2);font-size:.77rem;margin-top:5px;display:none}
+.field.invalid input,.field.invalid select{border-color:var(--brand-2);background:rgba(179,24,47,.05)}
+.field.invalid .err{display:block}
+.members-box{background:var(--bg-2);border:1px dashed var(--border);border-radius:14px;padding:17px;margin-bottom:17px;display:none}
+.members-box.show{display:block}
+.members-box h4{font-size:.94rem;margin-bottom:4px}
+.members-box .sub{font-size:.79rem;color:var(--muted);margin-bottom:13px}
+.member-row{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;margin-bottom:10px}
+@media(max-width:620px){.member-row{grid-template-columns:1fr 1fr;gap:8px}}
+.member-row input{padding:10px 12px;font-size:.87rem}
+.rm{border:0;background:rgba(179,24,47,.1);color:var(--brand-2);border-radius:10px;width:38px;cursor:pointer;font-size:1.1rem;font-weight:700}
+.rm:hover{background:rgba(179,24,47,.2)}
+.add-member{background:none;border:1.5px dashed var(--border);color:var(--text);padding:9px 16px;border-radius:11px;font-weight:600;font-size:.84rem;cursor:pointer}
+.add-member:hover{background:var(--brand-soft)}
+.summary{background:linear-gradient(135deg,rgba(240,194,75,.16),rgba(240,194,75,.05));border:1px solid rgba(212,160,23,.45);
+  border-radius:16px;padding:19px 21px;margin:6px 0 20px}
+.s-row{display:flex;justify-content:space-between;gap:14px;font-size:.91rem;padding:5px 0}
+.s-row.total{border-top:1px dashed var(--border);margin-top:8px;padding-top:12px;font-weight:700;font-size:1.06rem;color:var(--brand-2)}
+.pay-panel{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
+  background:linear-gradient(135deg,var(--hero-1),var(--hero-2));color:#fff;border-radius:16px;padding:17px 21px;margin:0 0 20px}
+.pay-panel .pp-text{display:flex;flex-direction:column;gap:2px;min-width:200px}
+.pay-panel .pp-text b{font-size:.98rem;color:var(--gold-2)}
+.pay-panel .pp-text span{font-size:.82rem;color:rgba(255,255,255,.82)}
+.form-actions{display:flex;flex-wrap:wrap;gap:12px}
+.form-actions .btn{flex:1 1 190px}
+.note{font-size:.79rem;color:var(--muted);margin-top:15px;display:flex;gap:9px;align-items:flex-start}
+.saved-hint{font-size:.78rem;color:var(--green);margin-bottom:14px;display:none;align-items:center;gap:7px}
+.saved-hint.show{display:flex}
 
-  /* ---------- Divine Offering ---------- */
-  .offering-sec{
-    background:
-      radial-gradient(700px 320px at 88% -10%,rgba(212,160,23,.28),transparent 60%),
-      radial-gradient(600px 300px at 0% 110%,rgba(179,24,47,.12),transparent 60%),
-      linear-gradient(160deg,#fff8ea,#f9e7c4);
-    border-top:1px solid rgba(212,160,23,.45);
-    border-bottom:1px solid rgba(212,160,23,.45);
-  }
-  .offer-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:38px;align-items:center}
-  @media(max-width:880px){.offer-grid{grid-template-columns:1fr;gap:26px}}
-  .offer-sub{font-family:'Tiro Bangla',serif;font-size:1.3rem;color:var(--crimson);margin-bottom:14px}
-  .offer-card{
-    background:#fff;border:1px solid rgba(212,160,23,.55);border-radius:22px;
-    padding:28px;box-shadow:var(--shadow-sm);
-  }
-  .offer-card h3{font-size:1.05rem;color:var(--maroon);margin-bottom:5px}
-  .offer-card .sub{font-size:.83rem;color:var(--ink-soft);margin-bottom:16px}
-  .offer-card .c-line .ci{background:linear-gradient(135deg,var(--gold-soft),#fff);border:1px solid rgba(212,160,23,.4)}
+/* ============================= OFFERING ============================= */
+.offering-sec{background:
+    radial-gradient(700px 320px at 88% -10%,rgba(212,160,23,.26),transparent 60%),
+    radial-gradient(600px 300px at 0% 110%,rgba(179,24,47,.1),transparent 60%),
+    linear-gradient(160deg,var(--surface-2),var(--bg-2));
+  border-top:1px solid rgba(212,160,23,.4);border-bottom:1px solid rgba(212,160,23,.4)}
+.offer-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:38px;align-items:center}
+@media(max-width:900px){.offer-grid{grid-template-columns:1fr;gap:26px}}
+.offer-sub{font-family:'Tiro Bangla',serif;font-size:1.28rem;color:var(--brand-2);margin-bottom:14px}
+.offer-card{background:var(--surface);border:1px solid rgba(212,160,23,.5);border-radius:22px;padding:26px;box-shadow:var(--shadow-sm)}
+.offer-card h3{font-size:1.02rem;color:var(--brand-2);margin-bottom:5px}
+.offer-card .sub{font-size:.82rem;color:var(--muted);margin-bottom:15px}
 
-  /* ---------- Timeline ---------- */
-  .timeline{position:relative;margin-top:40px;padding-left:8px}
-  .tl-item{display:grid;grid-template-columns:88px 1fr;gap:22px;padding:16px 0;border-bottom:1px solid rgba(109,13,28,.1)}
-  .tl-item:last-child{border-bottom:0}
-  .tl-year{font-family:'Tiro Bangla',serif;font-weight:700;font-size:1.3rem;color:var(--crimson)}
-  .tl-item h4{font-size:1.02rem;margin-bottom:4px}
-  .tl-item p{font-size:.9rem;color:var(--ink-soft)}
-  @media(max-width:560px){.tl-item{grid-template-columns:1fr;gap:4px}}
+/* ============================= CONTACT LINES ============================= */
+.c-line{display:flex;gap:13px;align-items:flex-start;padding:11px 0;font-size:.94rem;border-bottom:1px solid var(--border)}
+.c-line:last-child{border-bottom:0}
+.c-line .ci{flex:0 0 auto;width:38px;height:38px;border-radius:11px;background:var(--bg-2);display:grid;place-items:center;font-size:1.02rem}
+.c-line b{display:block;font-size:.94rem}
+.c-line a{color:var(--brand-2);font-weight:500}
+.c-line span.sm{font-size:.81rem;color:var(--muted)}
 
-  /* ---------- FAQ ---------- */
-  .faq{max-width:840px;margin:36px auto 0}
-  .qa{background:#fff;border:1px solid rgba(109,13,28,.1);border-radius:16px;margin-bottom:12px;overflow:hidden;box-shadow:var(--shadow-sm)}
-  .qa button{
-    width:100%;text-align:left;background:none;border:0;padding:19px 22px;font-family:inherit;
-    font-size:1rem;font-weight:600;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center;
-  }
-  .qa button .ic{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--cream-2);color:var(--maroon);display:grid;place-items:center;font-weight:700;transition:transform .25s}
-  .qa.open button .ic{transform:rotate(45deg)}
-  .qa .ans{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--ink-soft);font-size:.93rem}
-  .qa .ans p{padding:0 22px 20px}
-  .qa.open .ans{max-height:340px}
+/* ============================= SPONSORS ============================= */
+.sponsor-sec{background:linear-gradient(165deg,#241213,#3a0f17 58%,#241213);color:#fff}
+[data-theme="dark"] .sponsor-sec{background:linear-gradient(165deg,#170f10,#2a0a11 58%,#170f10)}
+.sponsor-sec .eyebrow{color:var(--gold-2)}
+.sponsor-sec h2.section-title{color:#fff}
+.sponsor-sec .lead{color:rgba(255,255,255,.8)}
+.impact{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:36px 0 8px}
+@media(max-width:760px){.impact{grid-template-columns:1fr 1fr}}
+.impact .i{background:rgba(255,255,255,.06);border:1px solid rgba(240,194,75,.24);border-radius:18px;padding:20px 16px;text-align:center}
+.impact .i b{display:block;font-size:1.8rem;font-weight:800;color:var(--gold-2);line-height:1.1}
+.impact .i span{font-size:.78rem;color:rgba(255,255,255,.76)}
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px}
+@media(max-width:1000px){.tiers{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.tiers{grid-template-columns:1fr}}
+.tier{background:rgba(255,255,255,.05);border:1px solid rgba(240,194,75,.28);border-radius:20px;padding:25px 21px;
+  display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+.tier:hover{transform:translateY(-4px);border-color:var(--gold-2)}
+.tier.hl{border-color:var(--gold-2);background:rgba(240,194,75,.1)}
+.tier .tname{font-family:'Tiro Bangla',serif;font-size:1.22rem;color:var(--gold-2);margin-bottom:2px}
+.tier .tprice{font-size:1.02rem;font-weight:700;margin-bottom:13px}
+.tier ul{list-style:none;display:grid;gap:8px;font-size:.84rem;color:rgba(255,255,255,.83);margin-bottom:18px}
+.tier li{display:flex;gap:9px;align-items:flex-start}
+.tier li::before{content:"✦";color:var(--gold-2);flex:0 0 auto}
+.tier .btn{margin-top:auto;font-size:.86rem;padding:11px 16px}
 
-  /* ---------- Contact ---------- */
-  .contact-sec{background:var(--cream-2)}
-  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:34px}
-  @media(max-width:760px){.contact-grid{grid-template-columns:1fr}}
-  .contact-card{background:#fff;border-radius:20px;padding:30px;border:1px solid rgba(109,13,28,.1);box-shadow:var(--shadow-sm)}
-  .contact-card h3{font-size:1.2rem;margin-bottom:16px}
-  .c-line{display:flex;gap:13px;align-items:flex-start;padding:11px 0;font-size:.95rem;border-bottom:1px solid rgba(109,13,28,.07)}
-  .c-line:last-child{border-bottom:0}
-  .c-line .ci{flex:0 0 auto;width:38px;height:38px;border-radius:11px;background:var(--cream);display:grid;place-items:center;font-size:1.05rem}
-  .c-line b{display:block;font-size:.95rem}
-  .c-line a{color:var(--crimson);font-weight:500}
-  .c-line span{font-size:.82rem;color:var(--ink-soft)}
+/* calculator */
+.calc{background:rgba(255,255,255,.06);border:1px solid rgba(240,194,75,.3);border-radius:22px;padding:28px;margin-top:36px}
+.calc h3{color:#fff;font-size:1.15rem;margin-bottom:6px}
+.calc p.calc-sub{font-size:.86rem;color:rgba(255,255,255,.75);margin-bottom:20px}
+.calc input[type=range]{width:100%;accent-color:var(--gold);height:34px;cursor:pointer}
+.calc .calc-amt{font-size:2rem;font-weight:800;color:var(--gold-2);line-height:1}
+.calc-out{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
+@media(max-width:700px){.calc-out{grid-template-columns:1fr}}
+.calc-res{background:rgba(0,0,0,.22);border-radius:16px;padding:20px;border:1px solid rgba(255,255,255,.08)}
+.calc-res .cr-tier{font-family:'Tiro Bangla',serif;font-size:1.35rem;color:var(--gold-2);margin-bottom:3px}
+.calc-res .cr-note{font-size:.8rem;color:rgba(255,255,255,.7);margin-bottom:12px}
+.calc-res ul{list-style:none;display:grid;gap:8px;font-size:.86rem;color:rgba(255,255,255,.85)}
+.calc-res li{display:flex;gap:9px}
+.calc-res li::before{content:"✓";color:var(--gold-2);font-weight:800;flex:0 0 auto}
+.reach{background:rgba(240,194,75,.1);border:1px dashed rgba(240,194,75,.45);border-radius:16px;padding:20px}
+.reach .r-row{display:flex;justify-content:space-between;gap:12px;font-size:.88rem;color:rgba(255,255,255,.85);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.reach .r-row:last-child{border-bottom:0}
+.reach .r-row b{color:var(--gold-2)}
+.reach .r-disc{font-size:.72rem;color:rgba(255,255,255,.55);margin-top:10px;line-height:1.5}
 
-  /* ---------- Footer ---------- */
-  footer{background:var(--maroon);color:rgba(255,255,255,.8);padding:48px 0 30px}
-  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
-  @media(max-width:760px){.foot-grid{grid-template-columns:1fr;gap:26px}}
-  footer h4{color:#fff;font-size:.95rem;margin-bottom:14px;letter-spacing:.04em}
-  footer a{display:block;padding:4px 0;font-size:.9rem;color:rgba(255,255,255,.75);transition:.2s}
-  footer a:hover{color:var(--gold-2)}
-  .foot-bottom{
-    margin-top:36px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14);
-    font-size:.8rem;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;color:rgba(255,255,255,.6);
-  }
-  .shloka{
-    font-family:'Tiro Bangla',serif;font-size:1.05rem;color:var(--gold-soft);text-align:center;
-    padding:26px 20px;line-height:1.8;
-  }
-  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
-  .reveal.in{opacity:1;transform:none}
-  .float-wa{
-    position:fixed;right:18px;bottom:18px;z-index:70;width:56px;height:56px;border-radius:50%;
-    background:#1faf54;color:#fff;display:grid;place-items:center;box-shadow:0 12px 30px -8px rgba(31,175,84,.8);
-    font-size:1.5rem;transition:transform .2s;
-  }
-  .float-wa:hover{transform:scale(1.08)}
+/* ============================= TIMELINE ============================= */
+.timeline{margin-top:36px;position:relative}
+.tl-item{display:grid;grid-template-columns:96px 1fr;gap:22px;padding:15px 0;border-bottom:1px solid var(--border)}
+.tl-item:last-child{border-bottom:0}
+.tl-year{font-family:'Tiro Bangla',serif;font-weight:700;font-size:1.25rem;color:var(--brand-2)}
+.tl-item h4{font-size:1rem;margin-bottom:4px}
+.tl-item p{font-size:.89rem;color:var(--muted)}
+@media(max-width:560px){.tl-item{grid-template-columns:1fr;gap:3px}}
+.awards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px}
+@media(max-width:760px){.awards{grid-template-columns:1fr 1fr}}
+.awards .a{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;text-align:center}
+.awards .a b{display:block;font-size:1.6rem;font-weight:800;color:var(--brand-2);line-height:1.1}
+.awards .a span{font-size:.77rem;color:var(--muted)}
+.schedule{margin-top:30px;border:1px solid var(--border);border-radius:18px;overflow:hidden;background:var(--surface)}
+.sch-row{display:grid;grid-template-columns:130px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border);font-size:.9rem}
+.sch-row:last-child{border-bottom:0}
+.sch-row b{color:var(--brand-2)}
+.sch-row span{color:var(--muted)}
+@media(max-width:560px){.sch-row{grid-template-columns:1fr;gap:3px}}
+
+/* ============================= FAQ ============================= */
+.faq{max-width:860px;margin:34px auto 0}
+.qa{background:var(--surface);border:1px solid var(--border);border-radius:16px;margin-bottom:11px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.qa button{width:100%;text-align:left;background:none;border:0;padding:18px 21px;font-size:.99rem;font-weight:600;color:var(--text);
+  cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.qa .ic{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--bg-2);color:var(--brand-2);display:grid;place-items:center;font-weight:700;transition:transform .25s}
+.qa.open .ic{transform:rotate(45deg)}
+.qa .ans{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--muted);font-size:.92rem}
+.qa .ans p{padding:0 21px 19px}
+.qa.open .ans{max-height:400px}
+
+/* ============================= FOOTER ============================= */
+footer{background:var(--brand);color:rgba(255,255,255,.8);padding:48px 0 30px}
+[data-theme="dark"] footer{background:#22060b}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:32px}
+@media(max-width:780px){.foot-grid{grid-template-columns:1fr;gap:26px}}
+footer h4{color:#fff;font-size:.94rem;margin-bottom:13px;letter-spacing:.04em}
+footer a{display:block;padding:4px 0;font-size:.89rem;color:rgba(255,255,255,.76);transition:.2s}
+footer a:hover{color:var(--gold-2)}
+.foot-bottom{margin-top:34px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14);font-size:.79rem;
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;color:rgba(255,255,255,.62)}
+.shloka{font-family:'Tiro Bangla',serif;font-size:1.05rem;color:var(--brand-2);text-align:center;padding:26px 20px;line-height:1.85}
+
+/* ============================= FLOATING UI ============================= */
+.fab-col{position:fixed;right:16px;bottom:18px;z-index:90;display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+.fab{width:56px;height:56px;border-radius:50%;border:0;display:grid;place-items:center;cursor:pointer;
+  box-shadow:0 14px 32px -10px rgba(0,0,0,.5);font-size:1.45rem;transition:transform .2s}
+.fab:hover{transform:scale(1.08)}
+.fab-wa{background:var(--wa);color:#fff}
+.fab-ai{background:linear-gradient(135deg,var(--gold-2),var(--gold));color:#5e0b18;position:relative}
+.fab-ai::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(240,194,75,.55);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{transform:scale(.9);opacity:.9}70%{transform:scale(1.25);opacity:0}100%{opacity:0}}
+@media(max-width:640px){
+  .fab-col{bottom:80px}
+  .mobile-bar{display:grid}
+  body{padding-bottom:70px}
+}
+.mobile-bar{position:fixed;left:0;right:0;bottom:0;z-index:95;display:none;grid-template-columns:1fr 1fr 1fr;
+  background:var(--glass);backdrop-filter:blur(14px);border-top:1px solid var(--border);
+  padding:8px 10px calc(8px + env(safe-area-inset-bottom))}
+.mobile-bar a{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.68rem;color:var(--muted);padding:6px 4px;border-radius:12px;font-weight:600}
+.mobile-bar a b{font-size:1.15rem;line-height:1}
+.mobile-bar a.primary{background:linear-gradient(135deg,var(--gold-2),var(--gold));color:#5e0b18}
+
+/* ============================= MODALS / ASSISTANT ============================= */
+.overlay{position:fixed;inset:0;background:rgba(20,8,12,.62);backdrop-filter:blur(4px);z-index:150;
+  display:none;align-items:flex-end;justify-content:center;padding:0}
+.overlay.show{display:flex}
+@media(min-width:700px){.overlay{align-items:center;padding:24px}}
+.modal{background:var(--surface);border-radius:24px 24px 0 0;width:100%;max-width:560px;max-height:88vh;overflow:auto;
+  box-shadow:var(--shadow);animation:slideUp .28s cubic-bezier(.2,.9,.3,1.1)}
+@media(min-width:700px){.modal{border-radius:24px}}
+@keyframes slideUp{from{transform:translateY(28px);opacity:.6}to{transform:none;opacity:1}}
+.modal-head{display:flex;align-items:center;gap:12px;padding:20px 22px;border-bottom:1px solid var(--border);
+  position:sticky;top:0;background:var(--surface);z-index:2}
+.modal-head h3{font-size:1.1rem;flex:1}
+.modal-body{padding:22px}
+.x-btn{width:36px;height:36px;border-radius:11px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);
+  cursor:pointer;font-size:1.15rem;line-height:1;flex:0 0 auto}
+.opt{display:block;width:100%;text-align:left;background:var(--surface-2);border:1.5px solid var(--border);border-radius:14px;
+  padding:15px 17px;margin-bottom:10px;cursor:pointer;font-size:.95rem;color:var(--text);font-weight:500;transition:.18s}
+.opt:hover{border-color:var(--gold);background:var(--brand-soft)}
+.opt small{display:block;color:var(--muted);font-weight:400;font-size:.81rem;margin-top:2px}
+.result-card{background:linear-gradient(135deg,rgba(240,194,75,.18),rgba(240,194,75,.05));
+  border:1px solid rgba(212,160,23,.5);border-radius:18px;padding:22px;text-align:center}
+.result-card .rc-tag{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-2);font-weight:700}
+.result-card h4{font-size:1.4rem;margin:6px 0 8px}
+.result-card p{font-size:.9rem;color:var(--muted);margin-bottom:16px}
+.step-dots{display:flex;gap:6px;margin-bottom:16px}
+.step-dots i{width:26px;height:4px;border-radius:4px;background:var(--border)}
+.step-dots i.on{background:var(--gold)}
+
+/* assistant */
+.chat-body{padding:16px 18px 8px;height:min(56vh,430px);overflow:auto;display:flex;flex-direction:column;gap:12px;background:var(--bg-2)}
+.msg{max-width:86%;padding:12px 15px;border-radius:16px;font-size:.92rem;line-height:1.55;white-space:pre-wrap}
+.msg.bot{background:var(--surface);border:1px solid var(--border);border-bottom-left-radius:5px;align-self:flex-start}
+.msg.me{background:linear-gradient(135deg,var(--brand-2),var(--brand));color:#fff;border-bottom-right-radius:5px;align-self:flex-end}
+.msg a{color:var(--brand-2);font-weight:600;text-decoration:underline}
+.msg.bot .msg-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
+.msg.bot .msg-actions a{background:var(--brand-soft);border:1px solid var(--border);border-radius:999px;padding:7px 13px;
+  font-size:.8rem;color:var(--brand-2);text-decoration:none;font-weight:600}
+.quick{display:flex;gap:8px;flex-wrap:wrap;padding:10px 18px 0}
+.quick button{background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:7px 13px;font-size:.8rem;
+  color:var(--muted);cursor:pointer;transition:.18s}
+.quick button:hover{border-color:var(--gold);color:var(--text)}
+.chat-input{display:flex;gap:9px;padding:12px 18px 18px;background:var(--bg-2);position:sticky;bottom:0}
+.chat-input input{flex:1;padding:12px 15px;border-radius:13px;border:1.5px solid var(--border);background:var(--surface);
+  color:var(--text);font-family:inherit;font-size:.93rem}
+.chat-input input:focus{outline:none;border-color:var(--gold)}
+.typing{display:flex;gap:4px;align-items:center;padding:12px 15px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}
+.typing i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,60%,100%{opacity:.25}30%{opacity:1}}
+.ai-note{font-size:.72rem;color:var(--muted);padding:0 18px 12px;background:var(--bg-2);line-height:1.5}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,140%);z-index:220;background:var(--text);color:var(--bg);
+  padding:13px 22px;border-radius:12px;font-size:.9rem;font-weight:500;box-shadow:var(--shadow);transition:transform .3s cubic-bezier(.2,.9,.3,1.2);max-width:90vw}
+.toast.show{transform:translate(-50%,0)}
+@media(max-width:640px){.toast{bottom:78px}}
+
+/* reveal — content is VISIBLE by default; JS opts in (fail-safe) */
+.js-reveal .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.js-reveal .reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  html{scroll-behavior:auto}
+  .js-reveal .reveal{opacity:1!important;transform:none!important}
+}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+<div id="progress" aria-hidden="true"></div>
 
 <header class="topbar">
   <div class="wrap">
-    <a href="#top" class="brand">
+    <a href="#top" class="brand" aria-label="EBCA home">
       <span class="logo">৺</span>
-      <span><b>EBCA</b><small>East Bengaluru Cultural Association</small></span>
+      <span><b>EBCA Companion</b><small>East Bengaluru Cultural Association</small></span>
     </a>
-    <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
-    <nav class="main" id="nav">
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="main" id="nav" aria-label="Main">
       <a href="#membership">Membership</a>
       <a href="#join">Join / Renew</a>
       <a href="#offering">Divine Offering</a>
       <a href="#sponsors">Sponsorship</a>
       <a href="#about">About</a>
+      <a href="#festival">Festival</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
-      <a href="#join" class="nav-cta">Become a Member</a>
+      <a href="#join" class="nav-cta">Join now</a>
     </nav>
+    <button class="icon-btn" id="themeBtn" aria-label="Switch theme" title="Switch light / dark"></button>
   </div>
 </header>
 
-<!-- HERO -->
+<main id="main">
+
+<!-- ================= HERO ================= -->
 <section class="hero" id="top">
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <span class="pill">🪔 Sobar Pujo · Since 2018 · Whitefield, Bengaluru</span>
+        <span class="pill">🪔 Sobar Pujo · Whitefield, Bengaluru · Est. 2016</span>
         <h1>Become part of the <span class="accent">EBCA Parivaar</span></h1>
         <p class="hero-sub">
-          More than a membership — a sacred bond of devotion, tradition and togetherness.
-          Join or renew your EBCA membership today and celebrate Durga Puja, Kali Pujo,
-          Anondo Mela and a whole year of culture with your extended family in East Bengaluru.
+          More than a membership — a bond of devotion, culture and togetherness. Join or renew in
+          two minutes, partner as a sponsor, or make a seva offering. This companion app is your
+          short-cut to everything EBCA, alongside our main site at ebcafamily.com.
         </p>
         <div class="cta-row">
-          <a href="#join" class="btn btn-gold">Join / Renew Membership →</a>
-          <a href="#sponsors" class="btn btn-ghost">Become a Sponsor</a>
+          <a href="#join" class="btn btn-gold">Join / Renew membership →</a>
+          <a href="#sponsors" class="btn btn-ghost">Become a sponsor</a>
         </div>
         <div class="hero-strip">
-          <span>✅ Free entry for all at Puja</span>
-          <span>🏆 Award-winning celebrations</span>
+          <span>✅ Free entry &amp; bhog for all</span>
+          <span>🏆 37+ awards</span>
           <span>📞 +91 96062 98720</span>
         </div>
       </div>
 
       <div class="hero-card">
-        <h3>Why members love EBCA</h3>
-        <p class="hint">A 2-minute digital membership — secure &amp; simple.</p>
+        <h3>EBCA at a glance</h3>
         <div class="stat-grid">
           <div class="stat"><b data-count="200000" data-suffix="+">0</b><span>Devotees annually</span></div>
           <div class="stat"><b data-count="9" data-suffix=" yrs">0</b><span>Of Sanskriti &amp; Seva</span></div>
           <div class="stat"><b data-count="100" data-suffix="+">0</b><span>Food &amp; craft stalls</span></div>
           <div class="stat"><b data-count="10" data-suffix="M+">0</b><span>Digital reach</span></div>
         </div>
-        <div style="margin-top:20px">
-          <a href="#membership" class="btn btn-outline btn-block">See membership plans</a>
+        <div class="count-card" id="countCard">
+          <div class="cc-label" id="ccLabel">EBCA Maha Durga Puja</div>
+          <div class="count-row" id="countRow">
+            <div><b id="cd-d">00</b><span>DAYS</span></div>
+            <div><b id="cd-h">00</b><span>HRS</span></div>
+            <div><b id="cd-m">00</b><span>MIN</span></div>
+            <div><b id="cd-s">00</b><span>SEC</span></div>
+          </div>
+          <div class="cc-done" id="ccDone" style="display:none"></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TRUST STRIP -->
+<!-- ================= TRUST ================= -->
 <div class="trust">
   <div class="wrap">
     <div class="t"><b>2,00,000+</b><span>Devotees every year</span></div>
-    <div class="t"><b>5 Days</b><span>Grand Durga Puja</span></div>
-    <div class="t"><b>50+</b><span>Cultural troupes</span></div>
+    <div class="t"><b>6 Days</b><span>Of Durga Puja</span></div>
+    <div class="t"><b>5,000+</b><span>Bengali books</span></div>
     <div class="t"><b>4.9 ★</b><span>500+ Google reviews</span></div>
   </div>
 </div>
 
-<!-- WHY JOIN -->
+<!-- ================= WHY ================= -->
 <section id="why">
   <div class="wrap center">
     <span class="eyebrow">A living Sanskriti</span>
     <h2 class="section-title">Dharma · Sanskriti · Samuhik Anand</h2>
     <div class="divider"></div>
-    <p class="lead">
-      EBCA is a cultural bridge in Bengaluru — uniting people beyond caste, creed and community,
-      bound by devotion and shared heritage. Membership makes you family.
-    </p>
-    <div class="benefits reveal">
-      <div class="b-card">
-        <div class="b-icon">🪔</div>
-        <h3>Seva</h3>
-        <p>Serving with humility and devotion — from 10,000+ meals at community bhog to senior-care and lactation lounges at the pandal.</p>
-      </div>
-      <div class="b-card">
-        <div class="b-icon">🎭</div>
-        <h3>Sanskriti</h3>
-        <p>Baul Akhara, Patachitra art, 5,000+ Bengali books, Dandiya nights and Dhunuchi Naach — heritage you live, not just watch.</p>
-      </div>
-      <div class="b-card">
-        <div class="b-icon">❤️</div>
-        <h3>Sampriti</h3>
-        <p>Bonds that make every heart feel at home — birthday &amp; anniversary wishes, volunteer teams, picnics and potlucks all year round.</p>
-      </div>
+    <p class="lead">EBCA is a socio-cultural philanthropic organisation, incepted in 2016, that unites people beyond caste, creed and community — bound by devotion and shared heritage. Membership makes you family.</p>
+    <div class="grid-3 reveal">
+      <div class="card"><div class="ic">🪔</div><h3>Seva</h3><p>Serving with humility — free bhog for all devotees, community meals, and dedicated senior-care and lactation lounges at the pandal.</p></div>
+      <div class="card"><div class="ic">🎭</div><h3>Sanskriti</h3><p>Baul Akhara, Patachitra art, 5,000+ Bengali books at the College Street book fair, Dhunuchi Naach and Dandiya nights.</p></div>
+      <div class="card"><div class="ic">❤️</div><h3>Sampriti</h3><p>Bonds that make every heart feel at home — birthday &amp; anniversary wishes, volunteer teams, picnics and potlucks all year round.</p></div>
+    </div>
+    <div class="chips reveal">
+      <span class="chip">🏮 Kids play zone</span>
+      <span class="chip">🧓 Senior care lounge</span>
+      <span class="chip">🛍️ Cultural &amp; shopping zone</span>
+      <span class="chip">🅿️ Free parking for 5,000+</span>
+      <span class="chip">🍲 Free bhog daily</span>
+      <span class="chip">📚 College Street book fair</span>
     </div>
   </div>
 </section>
 
-<!-- MEMBERSHIP PLANS -->
-<section id="membership" style="background:var(--cream-2)">
+<!-- ================= PLANS ================= -->
+<section id="membership" style="background:var(--bg-2)">
   <div class="wrap center">
-    <span class="eyebrow">Membership 2026</span>
+    <span class="eyebrow">Membership</span>
     <h2 class="section-title">Choose your membership</h2>
     <div class="divider"></div>
-    <p class="lead">Simple annual plans for individuals and families. Renewing? Pick the same plan — we'll recognise you as an existing member.</p>
+    <p class="lead">Simple annual plans for individuals and families. Renewing? Pick the same plan — you'll be recognised as an existing member. Not sure? Let us help you decide.</p>
+    <div style="margin-top:22px"><button class="btn btn-brand" id="fitBtn">✨ Find your fit in 30 seconds</button></div>
 
     <div class="plans reveal">
       <div class="plan">
@@ -517,7 +576,6 @@
         </ul>
         <button class="btn btn-outline" data-plan="Solo" data-amt="3001">Join / Renew — Solo</button>
       </div>
-
       <div class="plan featured">
         <span class="tag">Most popular</span>
         <h3>Family Membership</h3>
@@ -526,27 +584,25 @@
         <ul>
           <li>Everything in Solo, for the whole family</li>
           <li>Covers spouse &amp; children (up to 4 members)</li>
-          <li>Celebration wall wishes for every family member</li>
+          <li>Celebration-wall wishes for every family member</li>
           <li>Family seating &amp; priority arrangements at events</li>
           <li>Best value for the EBCA Parivaar</li>
         </ul>
         <button class="btn btn-gold" data-plan="Family" data-amt="4501">Join / Renew — Family</button>
       </div>
     </div>
-    <p class="note" style="justify-content:center;margin-top:24px">
-      <span>💡</span><span>Membership runs for one year from the date of joining/renewal. Payment via UPI, cards &amp; net banking on our secure portal.</span>
-    </p>
+    <p class="note" style="justify-content:center;margin-top:22px"><span>💡</span><span>Membership runs for one year from the date of joining/renewal. Payment via UPI, cards &amp; net banking on EBCA's secure portal.</span></p>
   </div>
 </section>
 
-<!-- JOIN / RENEW FORM -->
+<!-- ================= JOIN / RENEW ================= -->
 <section id="join">
   <div class="wrap">
     <div class="center">
       <span class="eyebrow">2-minute digital membership</span>
       <h2 class="section-title">Join or renew in a few steps</h2>
       <div class="divider"></div>
-      <p class="lead">Fill in your details below. We'll prepare a ready-to-send request for the EBCA membership team over WhatsApp or email — no forms lost in a pile.</p>
+      <p class="lead">Fill in your details. We'll prepare a ready-to-send request for the EBCA membership desk over WhatsApp or email — then you complete payment on EBCA's secure portal.</p>
     </div>
 
     <div class="form-shell reveal">
@@ -555,6 +611,7 @@
         <p>Secure &amp; simple — your details go only to the EBCA membership desk.</p>
       </div>
       <div class="form-body">
+        <div class="saved-hint" id="savedHint"><span>💾</span><span>We saved your progress on this device — feel free to come back later.</span></div>
         <div class="seg" id="typeSeg">
           <button type="button" class="active" data-type="New">New Membership</button>
           <button type="button" data-type="Renewal">Renewal</button>
@@ -563,42 +620,40 @@
         <form id="memberForm" novalidate>
           <div class="field-row">
             <div class="field" data-field="name">
-              <label>Full name <span class="req">*</span></label>
-              <input type="text" name="name" placeholder="e.g. Ananya Chatterjee" autocomplete="name">
+              <label for="f-name">Full name <span class="req">*</span></label>
+              <input id="f-name" type="text" name="name" placeholder="e.g. Ananya Chatterjee" autocomplete="name">
               <div class="err">Please enter your name.</div>
             </div>
             <div class="field" data-field="phone">
-              <label>Mobile / WhatsApp <span class="req">*</span></label>
-              <input type="tel" name="phone" placeholder="10-digit mobile number" autocomplete="tel">
+              <label for="f-phone">Mobile / WhatsApp <span class="req">*</span></label>
+              <input id="f-phone" type="tel" name="phone" placeholder="10-digit mobile number" autocomplete="tel" inputmode="numeric">
               <div class="err">Please enter a valid 10-digit mobile number.</div>
             </div>
           </div>
-
           <div class="field-row">
             <div class="field" data-field="email">
-              <label>Email</label>
-              <input type="email" name="email" placeholder="you@example.com" autocomplete="email">
+              <label for="f-email">Email</label>
+              <input id="f-email" type="email" name="email" placeholder="you@example.com" autocomplete="email">
               <div class="err">Please enter a valid email.</div>
             </div>
             <div class="field" data-field="apartment">
-              <label>Apartment / Society</label>
-              <input type="text" name="apartment" placeholder="e.g. Prestige Shantiniketan, Whitefield">
+              <label for="f-apt">Apartment / Society</label>
+              <input id="f-apt" type="text" name="apartment" placeholder="e.g. Prestige Shantiniketan, Whitefield">
               <div class="err"></div>
             </div>
           </div>
-
           <div class="field-row">
             <div class="field" data-field="plan">
-              <label>Membership type <span class="req">*</span></label>
-              <select name="plan" id="planSelect">
+              <label for="planSelect">Membership type <span class="req">*</span></label>
+              <select id="planSelect" name="plan">
                 <option value="Solo|3001">Solo Membership — ₹3,001 / year</option>
                 <option value="Family|4501" selected>Family Membership — ₹4,501 / year</option>
               </select>
               <div class="err"></div>
             </div>
             <div class="field" data-field="members">
-              <label>Number of family members</label>
-              <select name="members" id="memberCount">
+              <label for="memberCount">Number of family members</label>
+              <select id="memberCount" name="members">
                 <option value="1">1</option>
                 <option value="2" selected>2</option>
                 <option value="3">3</option>
@@ -609,13 +664,13 @@
           </div>
 
           <div class="members-box" id="membersBox">
-            <h4>Family member details <span style="font-weight:400;color:var(--ink-soft)">(optional)</span></h4>
+            <h4>Family member details <span style="font-weight:400;color:var(--muted)">(optional)</span></h4>
             <p class="sub">Add names so we can include them on the EBCA celebration wall for birthday &amp; anniversary wishes.</p>
             <div id="memberRows"></div>
             <button type="button" class="add-member" id="addMember">+ Add member</button>
           </div>
 
-          <div class="summary" id="summary">
+          <div class="summary">
             <div class="s-row"><span>Membership</span><b id="sumPlan">Family Membership</b></div>
             <div class="s-row"><span>Registration type</span><b id="sumType">New Membership</b></div>
             <div class="s-row"><span>Members covered</span><b id="sumMembers">2</b></div>
@@ -631,63 +686,49 @@
           </div>
 
           <div class="form-actions">
-            <button type="button" class="btn btn-wa" id="sendWa">📲 Send request on WhatsApp</button>
-            <button type="button" class="btn btn-maroon" id="sendMail">✉️ Send by email</button>
+            <button type="button" class="btn btn-wa" id="sendWa">📲 Send on WhatsApp</button>
+            <button type="button" class="btn btn-brand" id="sendMail">✉️ Send by email</button>
             <button type="button" class="btn btn-outline" id="copyBtn">📋 Copy details</button>
           </div>
-
-          <p class="note">
-            <span>🔒</span>
-            <span>Nothing is stored on this page. Tapping a button opens your own WhatsApp/email app with a pre-filled message addressed to the EBCA membership desk. Complete payment on EBCA's secure portal (<a href="https://ebcafamily.com/2026/membership" target="_blank" rel="noopener" style="color:var(--crimson);font-weight:600">ebcafamily.com/2026/membership</a>) — UPI, cards &amp; net banking.</span>
-          </p>
+          <p class="note"><span>🔒</span><span>Nothing is sent to a server. Tapping a button opens your own WhatsApp/email app with a pre-filled message for the EBCA membership desk. Complete payment on <a href="https://ebcafamily.com/2026/membership" target="_blank" rel="noopener" style="color:var(--brand-2);font-weight:600">EBCA's secure portal</a> — UPI, cards &amp; net banking.</span></p>
         </form>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DIVINE OFFERING -->
+<!-- ================= OFFERING ================= -->
 <section class="offering-sec" id="offering">
   <div class="wrap">
     <div class="offer-grid reveal">
-      <div class="offer-text">
+      <div>
         <span class="eyebrow">Seva · Bhakti · Samarpan</span>
         <h2 class="section-title">Bhakti Samarpan</h2>
         <p class="offer-sub">The EBCA Maha Durga Puja 2026</p>
         <p class="lead">Join us in making a Seva offering to Maa Durga and be a part of our Puja celebrations.</p>
-        <div class="cta-row" style="margin-top:24px">
-          <a class="btn btn-maroon" href="https://ebcafamily.com/2026/divine_offering" target="_blank" rel="noopener">🪔 Contribute — Divine Offering</a>
+        <div class="cta-row" style="margin-top:22px">
+          <a class="btn btn-brand" href="https://ebcafamily.com/2026/divine_offering" target="_blank" rel="noopener">🪔 Contribute — Divine Offering</a>
           <a class="btn btn-outline" href="#join">Become a member</a>
         </div>
       </div>
       <div class="offer-card">
         <h3>For queries, reach out to</h3>
         <p class="sub">Our team will be glad to help with your seva offering.</p>
-        <div class="c-line">
-          <span class="ci">📞</span>
-          <span><b>Krishanu</b>
-            <span><a href="tel:+919830597671">+91 98305 97671</a> · <a href="https://wa.me/919830597671" target="_blank" rel="noopener">WhatsApp</a></span>
-          </span>
-        </div>
-        <div class="c-line">
-          <span class="ci">📞</span>
-          <span><b>Nilanjan</b>
-            <span><a href="tel:+919886050873">+91 98860 50873</a> · <a href="https://wa.me/919886050873" target="_blank" rel="noopener">WhatsApp</a></span>
-          </span>
-        </div>
+        <div class="c-line"><span class="ci">📞</span><span><b>Krishanu</b><span class="sm"><a href="tel:+919830597671">+91 98305 97671</a> · <a href="https://wa.me/919830597671" target="_blank" rel="noopener">WhatsApp</a></span></span></div>
+        <div class="c-line"><span class="ci">📞</span><span><b>Nilanjan</b><span class="sm"><a href="tel:+919886050873">+91 98860 50873</a> · <a href="https://wa.me/919886050873" target="_blank" rel="noopener">WhatsApp</a></span></span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SPONSORS -->
+<!-- ================= SPONSORS ================= -->
 <section class="sponsor-sec" id="sponsors">
   <div class="wrap">
     <div class="center">
       <span class="eyebrow">Sponsors &amp; Partners</span>
       <h2 class="section-title">Partner with Bangalore's biggest Durga Puja</h2>
-      <div class="divider" style="background:linear-gradient(90deg,var(--gold-2),var(--crimson))"></div>
-      <p class="lead">Reach lakhs of devotees, gain authentic community goodwill, and be part of an award-winning cultural celebration in Whitefield.</p>
+      <div class="divider" style="background:linear-gradient(90deg,var(--gold-2),var(--brand-2))"></div>
+      <p class="lead">Reach lakhs of devotees, earn authentic community goodwill, and be part of an award-winning cultural celebration in Whitefield.</p>
     </div>
 
     <div class="impact reveal">
@@ -701,150 +742,195 @@
       <div class="tier">
         <div class="tname">Shakti</div>
         <div class="tprice">₹12,000 – ₹25,000</div>
-        <ul>
-          <li>Name on digital wall of fame</li>
-          <li>Social media shoutout</li>
-          <li>Special mention during event</li>
-          <li>Prasad hamper</li>
-        </ul>
-        <button class="btn btn-outline" data-sponsor="Shakti (₹12,000–₹25,000)">Enquire</button>
+        <ul><li>Name on digital wall of fame</li><li>Social media shoutout</li><li>Special mention during event</li><li>Prasad hamper</li></ul>
+        <button class="btn btn-ghost" data-sponsor="Shakti (₹12,000–₹25,000)">Enquire</button>
       </div>
-      <div class="tier">
+      <div class="tier hl">
         <div class="tname">Sanskriti</div>
         <div class="tprice">₹25,000 – ₹1,00,000</div>
-        <ul>
-          <li>Logo on event banner</li>
-          <li>Social media campaign</li>
-          <li>Stage mentioning (3×)</li>
-          <li>2 VIP passes</li>
-          <li>Prasad hamper + memento</li>
-        </ul>
-        <button class="btn btn-outline" data-sponsor="Sanskriti (₹25,000–₹1,00,000)">Enquire</button>
+        <ul><li>Logo on event banner</li><li>Social media campaign</li><li>Stage mention (3×)</li><li>2 VIP passes</li><li>Prasad hamper + memento</li></ul>
+        <button class="btn btn-gold" data-sponsor="Sanskriti (₹25,000–₹1,00,000)">Enquire</button>
       </div>
       <div class="tier">
         <div class="tname">Mahotsav</div>
         <div class="tprice">₹1,00,000 – ₹5,00,000</div>
-        <ul>
-          <li>Premium logo on pandal</li>
-          <li>Dedicated social posts</li>
-          <li>Stage mentioning (5×)</li>
-          <li>5 VIP passes + parking</li>
-          <li>Stall / booth space</li>
-          <li>Media coverage mention</li>
-        </ul>
-        <button class="btn btn-gold" data-sponsor="Mahotsav (₹1,00,000–₹5,00,000)">Enquire</button>
+        <ul><li>Premium logo on pandal</li><li>Dedicated social posts</li><li>Stage mention (5×)</li><li>5 VIP passes + parking</li><li>Stall / booth space</li><li>Media coverage mention</li></ul>
+        <button class="btn btn-ghost" data-sponsor="Mahotsav (₹1,00,000–₹5,00,000)">Enquire</button>
       </div>
       <div class="tier">
         <div class="tname">Adya Shakti</div>
         <div class="tprice">Title Sponsor</div>
-        <ul>
-          <li>Title sponsorship rights</li>
-          <li>Prime branding across assets</li>
-          <li>Stage naming rights</li>
-          <li>10 VIP passes + reserved parking</li>
-          <li>Press release &amp; media coverage</li>
-          <li>Recognition ceremony</li>
-        </ul>
+        <ul><li>Title sponsorship rights</li><li>Prime branding across assets</li><li>Stage naming rights</li><li>10 VIP passes + reserved parking</li><li>Press release &amp; media coverage</li><li>Recognition ceremony</li></ul>
         <button class="btn btn-gold" data-sponsor="Adya Shakti (Title Sponsor)">Enquire</button>
       </div>
     </div>
 
-    <div class="center" style="margin-top:38px">
-      <p class="lead" style="color:rgba(255,255,255,.85)">Ready to partner, or want a custom package for your brand?</p>
-      <div class="cta-row" style="justify-content:center;margin-top:18px">
-        <a class="btn btn-gold" id="sponsorWa" href="#">💬 Talk to the sponsorship team</a>
+    <div class="calc reveal">
+      <h3>✨ What would my budget get?</h3>
+      <p class="calc-sub">Move the slider to see the tier that matches, the benefits included, and the audience you'd reach.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between">
+        <div><div class="calc-amt" id="calcAmt">₹50,000</div><div style="font-size:.78rem;color:rgba(255,255,255,.65)">your sponsorship budget</div></div>
+        <input type="range" id="calcRange" min="12000" max="600000" step="1000" value="50000" aria-label="Sponsorship budget" style="flex:1 1 240px;min-width:200px">
+      </div>
+      <div class="calc-out">
+        <div class="calc-res">
+          <div class="cr-tier" id="calcTier">Sanskriti</div>
+          <div class="cr-note" id="calcNote">Silver Partner</div>
+          <ul id="calcBenefits"></ul>
+        </div>
+        <div class="reach">
+          <div class="r-row"><span>Devotees at the pandal</span><b>2,00,000+</b></div>
+          <div class="r-row"><span>Digital &amp; social reach</span><b>10M+</b></div>
+          <div class="r-row"><span>Media features</span><b>45+</b></div>
+          <div class="r-row"><span>Festival days</span><b>6</b></div>
+          <div class="r-disc">Figures are EBCA's published annual numbers, shown as an indicative reach estimate — not a guaranteed impression count.</div>
+        </div>
+      </div>
+      <div class="cta-row" style="margin-top:22px">
+        <button class="btn btn-gold" id="calcEnquire">Enquire about this tier →</button>
         <a class="btn btn-ghost" href="mailto:sponsorship@ebcafamily.com">✉️ sponsorship@ebcafamily.com</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ================= ABOUT ================= -->
 <section id="about">
   <div class="wrap">
     <div class="center">
-      <span class="eyebrow">Our journey</span>
+      <span class="eyebrow">About EBCA</span>
       <h2 class="section-title">From Sankalp to Sanskriti</h2>
       <div class="divider"></div>
-      <p class="lead">Since 2018, EBCA has grown into East Bengaluru's flagship cultural celebration — a Sanatani socio-cultural space where traditions are preserved, festivals are experienced and culture is lived.</p>
+      <p class="lead">A socio-cultural philanthropic organisation incepted in 2016, EBCA has grown into East Bengaluru's flagship cultural celebration — serving the Whitefield–KR Puram corridor and known as the "Maddox Square of Bangalore".</p>
     </div>
+
     <div class="timeline reveal">
-      <div class="tl-item"><div class="tl-year">2018</div><div><h4>The beginning of a sacred yatra</h4><p>Inaugurated by Locket Chatterjee and blessed with a message from the Hon'ble Prime Minister. Introduced Bengaluru's first Anandamela.</p></div></div>
+      <div class="tl-item"><div class="tl-year">2016</div><div><h4>The beginning</h4><p>EBCA is incepted as a socio-cultural philanthropic organisation in East Bengaluru.</p></div></div>
+      <div class="tl-item"><div class="tl-year">2018</div><div><h4>A sacred yatra</h4><p>Inaugurated by Locket Chatterjee with a blessing message from the Hon'ble Prime Minister. Bengaluru's first Anandamela and a 20-ft Kali murti.</p></div></div>
       <div class="tl-item"><div class="tl-year">2020</div><div><h4>Dharma in difficult times</h4><p>Kept Bhakti uninterrupted through digital celebrations and virtual festivals during the pandemic.</p></div></div>
       <div class="tl-item"><div class="tl-year">2022</div><div><h4>Seva beyond celebration</h4><p>10,000+ meals served, Channapatna toys promoted (Vocal for Local), and multiple awards received.</p></div></div>
       <div class="tl-item"><div class="tl-year">2024</div><div><h4>A grand cultural confluence</h4><p>Widely recognised as the "Maddox Square of Bangalore" — Dhaki &amp; Dhunuchi Naach competitions and a landmark performance by Bhoomi.</p></div></div>
-      <div class="tl-item"><div class="tl-year">2025</div><div><h4>Towards greater glory</h4><p>College Street comes to Bengaluru with 5,000+ Bengali books, Patachitra art, and a theme pandal by Chitra Kala Parishad.</p></div></div>
+      <div class="tl-item"><div class="tl-year">2026</div><div><h4>9 glorious years</h4><p>College Street book fair with 5,000+ Bengali books, Patachitra art, and a theme pandal by Bangalore Chitra Kala Parishad.</p></div></div>
     </div>
-    <div class="shloka" style="color:var(--maroon)">
-      “या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता।<br>नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥”
+
+    <div class="awards reveal">
+      <div class="a"><b>37+</b><span>National &amp; global awards</span></div>
+      <div class="a"><b>45+</b><span>Media features</span></div>
+      <div class="a"><b>26+</b><span>Dailies covered</span></div>
+      <div class="a"><b>2L+</b><span>Devotees reached</span></div>
+    </div>
+
+    <div class="grid-2 reveal" style="margin-top:26px">
+      <div class="card">
+        <h3>🏆 Recognition</h3>
+        <p><b>Sharod Utsav Samman Global Awards</b> — Best Venue &amp; Best Publicity, Mega Durga Puja category.</p>
+        <p style="margin-top:8px"><b>Durga Puja Innovation Award</b> — honoured by the Times of India for community-driven celebration and digital engagement.</p>
+        <p style="margin-top:8px">Featured in <b>The Hindu, Times of India, Aajkaal, Deccan Chronicle, Eventex</b> and more.</p>
+      </div>
+      <div class="card">
+        <h3>🤝 Brand collaborations</h3>
+        <p><b>Orion Uptown Mall</b> — cultural collaboration and pre-Puja showcase events.</p>
+        <p style="margin-top:8px"><b>RED FM</b> — official media partner for Dandiya Nights and cultural events.</p>
+        <p style="margin-top:8px">Plus hospitality, community, cultural, logistics and gifting partners across Bengaluru.</p>
+      </div>
+    </div>
+
+    <div class="shloka">“या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता।<br>नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः ॥”</div>
+  </div>
+</section>
+
+<!-- ================= FESTIVAL ================= -->
+<section id="festival" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">The Festival</span>
+      <h2 class="section-title">EBCA Maha Durga Puja 2026</h2>
+      <div class="divider"></div>
+      <p class="lead">Six days of authentic rituals, culture and community at Whitefield, Bengaluru — as per Benimadhab Sil's Full Panjika 1433. Free entry and free bhog for all.</p>
+      <div class="chips" style="margin-top:18px">
+        <span class="chip">📅 16–21 October 2026</span>
+        <span class="chip">📍 Sri Manjunatha Swamy Kalyana Mantapa, Katamnallur</span>
+        <span class="chip">🚇 3 km from Whitefield Metro</span>
+        <span class="chip">🅿️ Free parking, 5,000+ vehicles</span>
+      </div>
+    </div>
+
+    <div class="schedule reveal">
+      <div class="sch-row"><b>Shashti · Fri 16 Oct</b><span>Bodhon, Amantran &amp; Adhibas (evening) · Maddox Square Book Fair inauguration</span></div>
+      <div class="sch-row"><b>Saptami · Sat 17 Oct</b><span>Nabapatrika Prabesh &amp; Saptami Puja, 7:41–10:03 AM · Pushpanjali 10:05 AM · Patachitra live demo</span></div>
+      <div class="sch-row"><b>Ashtami · Sun 18 Oct</b><span>Maha Ashtami Puja 6:14–10:03 AM · Pushpanjali 10:05 AM · Special Bhog 2–4 PM</span></div>
+      <div class="sch-row"><b>Sandhi Puja · Mon 19 Oct</b><span>Sandhi Puja 7:26–8:14 AM · Bali Daan 7:50 AM · 108 diyas lit — the most auspicious moment</span></div>
+      <div class="sch-row"><b>Navami · Tue 20 Oct</b><span>Maha Navami Puja 9:06–9:31 AM · Pushpanjali 9:35 AM · Dhunuchi Naach &amp; Dandiya Night</span></div>
+      <div class="sch-row"><b>Dashami · Wed 21 Oct</b><span>Dashami Puja &amp; Visarjan · Sindur Khela · Bijoya Sammilani</span></div>
+    </div>
+
+    <div class="grid-3 reveal" style="margin-top:26px">
+      <div class="card"><div class="ic">🍲</div><h3>Daily Bhog</h3><p>11:30 AM – 1:00 PM · Khichuri, Labra, Papad, Chutney. Ashtami &amp; Navami special: 2–4 PM. Evening prasad: 7–8:30 PM.</p></div>
+      <div class="card"><div class="ic">🕉️</div><h3>Sacred rituals</h3><p>Chandi Path, Pushpanjali, Sandhi Puja and Kumari Puja — guided by Sri Sibaprosad Mukhopadhyay.</p></div>
+      <div class="card"><div class="ic">📚</div><h3>Maddox Square</h3><p>College Street comes to Whitefield — 5,000+ Bengali books, Patachitra art and a food street.</p></div>
+    </div>
+
+    <div class="center" style="margin-top:28px">
+      <button class="btn btn-outline" id="calBtn">📅 Add these dates to my calendar</button>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
-<section id="faq" style="background:var(--cream-2)">
+<!-- ================= FAQ ================= -->
+<section id="faq">
   <div class="wrap center">
     <span class="eyebrow">Good to know</span>
     <h2 class="section-title">Frequently asked questions</h2>
     <div class="divider"></div>
+    <p class="lead">Can't find your answer? Tap the ✨ button at the bottom right to ask EBCA's assistant, or reach the team on WhatsApp.</p>
   </div>
   <div class="wrap">
     <div class="faq">
-      <div class="qa">
-        <button>What is included in the membership?<span class="ic">+</span></button>
-        <div class="ans"><p>Members enjoy priority access to Durga Puja events, cultural programmes, volunteer opportunities, community networking, birthday &amp; anniversary wishes, and exclusive member benefits.</p></div>
-      </div>
-      <div class="qa">
-        <button>What is the difference between Solo and Family membership?<span class="ic">+</span></button>
-        <div class="ans"><p>Solo membership (₹3,001) is for individual registration. Family membership (₹4,501) covers up to 4 family members including spouse and children.</p></div>
-      </div>
-      <div class="qa">
-        <button>How do I pay for membership?<span class="ic">+</span></button>
-        <div class="ans"><p>Complete your fee on EBCA's secure payment portal at <a href="https://ebcafamily.com/2026/membership" target="_blank" rel="noopener" style="color:var(--crimson);font-weight:600">ebcafamily.com/2026/membership</a>, which supports UPI, credit/debit cards and net banking. You can also pay at the EBCA membership desk.</p></div>
-      </div>
-      <div class="qa">
-        <button>Will my family members receive birthday / anniversary wishes?<span class="ic">+</span></button>
-        <div class="ans"><p>Yes. Add their names in the form and we'll place all family members on our celebration wall and wish them on their special days.</p></div>
-      </div>
-      <div class="qa">
-        <button>I'm an existing member — how do I renew?<span class="ic">+</span></button>
-        <div class="ans"><p>Select <b>Renewal</b> in the form above, choose your plan, and send your request. Your membership continues seamlessly for another year.</p></div>
-      </div>
-      <div class="qa">
-        <button>Is there an entry fee for Durga Puja?<span class="ic">+</span></button>
-        <div class="ans"><p>No — entry to EBCA Durga Puja is completely FREE for all visitors, and Bhog Prasad is served free daily. Membership adds year-round community benefits.</p></div>
-      </div>
+      <div class="qa"><button>What is included in the membership?<span class="ic">+</span></button><div class="ans"><p>Members enjoy priority access to Durga Puja events, cultural programmes, volunteer opportunities, community networking, birthday &amp; anniversary wishes, and exclusive member benefits.</p></div></div>
+      <div class="qa"><button>What is the difference between Solo and Family membership?<span class="ic">+</span></button><div class="ans"><p>Solo membership (₹3,001) is for individual registration. Family membership (₹4,501) covers up to 4 family members including spouse and children.</p></div></div>
+      <div class="qa"><button>How do I pay for membership?<span class="ic">+</span></button><div class="ans"><p>Complete your fee on EBCA's secure payment portal at <a href="https://ebcafamily.com/2026/membership" target="_blank" rel="noopener" style="color:var(--brand-2);font-weight:600">ebcafamily.com/2026/membership</a>, which supports UPI, credit/debit cards and net banking. You can also pay at the EBCA membership desk.</p></div></div>
+      <div class="qa"><button>Will my family members receive birthday / anniversary wishes?<span class="ic">+</span></button><div class="ans"><p>Yes. Add their names in the form and we'll place all family members on our celebration wall and wish them on their special days.</p></div></div>
+      <div class="qa"><button>I'm an existing member — how do I renew?<span class="ic">+</span></button><div class="ans"><p>Select <b>Renewal</b> in the form above, choose your plan, and send your request. Your membership continues seamlessly for another year.</p></div></div>
+      <div class="qa"><button>Is there an entry fee for Durga Puja?<span class="ic">+</span></button><div class="ans"><p>No — entry to EBCA Durga Puja is completely FREE for all visitors, and Bhog Prasad is served free daily. Membership adds year-round community benefits.</p></div></div>
+      <div class="qa"><button>How do I become a sponsor?<span class="ic">+</span></button><div class="ans"><p>Sponsorship packages run from ₹12,000 for individuals and small businesses up to title sponsorship. Email <a href="mailto:sponsorship@ebcafamily.com" style="color:var(--brand-2);font-weight:600">sponsorship@ebcafamily.com</a> or call +91 96062 98720 — or use the budget tool above.</p></div></div>
+      <div class="qa"><button>Can I volunteer?<span class="ic">+</span></button><div class="ans"><p>Absolutely. Email <a href="mailto:volunteer@ebcafamily.com" style="color:var(--brand-2);font-weight:600">volunteer@ebcafamily.com</a> or call +91 96062 98720. We need help with crowd management, food distribution, cultural programmes and more.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact-sec" id="contact">
+<!-- ================= CONTACT ================= -->
+<section id="contact" style="background:var(--bg-2)">
   <div class="wrap center">
     <span class="eyebrow">We'd love to hear from you</span>
     <h2 class="section-title">Contact EBCA</h2>
     <div class="divider"></div>
   </div>
   <div class="wrap">
-    <div class="contact-grid reveal">
-      <div class="contact-card">
+    <div class="grid-2 reveal">
+      <div class="card">
         <h3>Membership &amp; General</h3>
-        <div class="c-line"><span class="ci">📞</span><span><b>+91 96062 98720</b><span>Available 10 AM – 8 PM, daily</span></span></div>
-        <div class="c-line"><span class="ci">✉️</span><span><b><a href="mailto:info@ebcafamily.com">info@ebcafamily.com</a></b><span>General inquiries &amp; membership</span></span></div>
-        <div class="c-line"><span class="ci">💬</span><span><b><a href="https://wa.me/919606298720" target="_blank" rel="noopener">Chat on WhatsApp</a></b><span>Instant help &amp; puja updates</span></span></div>
-        <div class="c-line"><span class="ci">💳</span><span><b><a href="https://ebcafamily.com/2026/membership" target="_blank" rel="noopener">Pay membership fee online</a></b><span>EBCA secure portal — UPI, cards, net banking</span></span></div>
-        <div class="c-line"><span class="ci">🌐</span><span><b><a href="https://ebcafamily.com" target="_blank" rel="noopener">ebcafamily.com</a></b><span>Official EBCA website</span></span></div>
+        <div class="c-line"><span class="ci">📞</span><span><b>+91 96062 98720</b><span class="sm">Available 10 AM – 8 PM, daily</span></span></div>
+        <div class="c-line"><span class="ci">✉️</span><span><b><a href="mailto:info@ebcafamily.com">info@ebcafamily.com</a></b><span class="sm">General inquiries &amp; membership</span></span></div>
+        <div class="c-line"><span class="ci">💬</span><span><b><a href="https://wa.me/919606298720" target="_blank" rel="noopener">Chat on WhatsApp</a></b><span class="sm">Instant help &amp; puja updates</span></span></div>
+        <div class="c-line"><span class="ci">💳</span><span><b><a href="https://ebcafamily.com/2026/membership" target="_blank" rel="noopener">Pay membership fee online</a></b><span class="sm">EBCA secure portal — UPI, cards, net banking</span></span></div>
+        <div class="c-line"><span class="ci">🌐</span><span><b><a href="https://ebcafamily.com" target="_blank" rel="noopener">ebcafamily.com</a></b><span class="sm">Official EBCA website</span></span></div>
       </div>
-      <div class="contact-card">
-        <h3>Sponsorship &amp; Venue</h3>
-        <div class="c-line"><span class="ci">🤝</span><span><b><a href="mailto:sponsorship@ebcafamily.com">sponsorship@ebcafamily.com</a></b><span>Partnerships &amp; brand collaborations</span></span></div>
-        <div class="c-line"><span class="ci">🙋</span><span><b><a href="mailto:volunteer@ebcafamily.com">volunteer@ebcafamily.com</a></b><span>Join the volunteer team</span></span></div>
-        <div class="c-line"><span class="ci">📍</span><span><b>Sri Manjunatha Swamy Kalyana Mantapa</b><span>Katamnallur, Whitefield, Bengaluru – 560049</span></span></div>
-        <div class="c-line"><span class="ci">🚇</span><span><b>3 km from Whitefield Metro (Purple Line)</b><span>BMTC 304, 305, 306 · Free parking for 5,000+ vehicles</span></span></div>
+      <div class="card">
+        <h3>Sponsorship, Venue &amp; Volunteering</h3>
+        <div class="c-line"><span class="ci">🤝</span><span><b><a href="mailto:sponsorship@ebcafamily.com">sponsorship@ebcafamily.com</a></b><span class="sm">Partnerships &amp; brand collaborations</span></span></div>
+        <div class="c-line"><span class="ci">🙋</span><span><b><a href="mailto:volunteer@ebcafamily.com">volunteer@ebcafamily.com</a></b><span class="sm">Join the volunteer team</span></span></div>
+        <div class="c-line"><span class="ci">📍</span><span><b>Sri Manjunatha Swamy Kalyana Mantapa</b><span class="sm">Katamnallur, Whitefield, Bengaluru – 560049</span></span></div>
+        <div class="c-line"><span class="ci">🚇</span><span><b>3 km from Whitefield Metro (Purple Line)</b><span class="sm">BMTC 304, 305, 306 · 15 min from Marathahalli · 20 min from KR Puram</span></span></div>
+        <div class="c-line"><span class="ci">🗺️</span><span><b><a href="https://maps.google.com/?q=Sri+Manjunatha+Swamy+Kalyana+Mantapa+Katamnallur+Whitefield+Bengaluru+560049" target="_blank" rel="noopener">Open in Google Maps</a></b><span class="sm">Get directions to the venue</span></span></div>
       </div>
+    </div>
+    <div class="center" style="margin-top:28px">
+      <button class="btn btn-outline" id="shareBtn">🔗 Share this app</button>
     </div>
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="wrap">
@@ -852,10 +938,11 @@
       <div>
         <div class="brand" style="margin-bottom:14px">
           <span class="logo">৺</span>
-          <span><b>EBCA</b><small>East Bengaluru Cultural Association</small></span>
+          <span><b>EBCA Companion</b><small>East Bengaluru Cultural Association</small></span>
         </div>
-        <p style="font-size:.9rem;color:rgba(255,255,255,.72);max-width:34ch">
-          A living embodiment of Dharma, Sanskriti and Samuhik Anand — uniting people beyond caste, creed and community.
+        <p style="font-size:.89rem;color:rgba(255,255,255,.74);max-width:36ch">
+          An independent companion app for EBCA members, sponsors and devotees. For the full
+          festival guide, visit <a href="https://ebcafamily.com" target="_blank" rel="noopener" style="display:inline;color:var(--gold-2)">ebcafamily.com</a>.
         </p>
       </div>
       <div>
@@ -876,13 +963,52 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© <span id="yr"></span> East Bengaluru Cultural Association (EBCA). All rights reserved.</span>
+      <span>© <span id="yr"></span> East Bengaluru Cultural Association (EBCA). Companion app — not the official website.</span>
       <span>Sobar Pujo · Whitefield, Bengaluru</span>
     </div>
   </div>
 </footer>
 
-<a class="float-wa" href="https://wa.me/919606298720" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+<div class="fab-col">
+  <button class="fab fab-ai" id="aiFab" aria-label="Ask EBCA assistant" title="Ask EBCA"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.8l2.3 6.4 6.4 2.3-6.4 2.3L12 19.2l-2.3-6.4L3.3 10.5l6.4-2.3L12 1.8z"/><path d="M19 15.2l.9 2.5 2.5.9-2.5.9-.9 2.5-.9-2.5-2.5-.9 2.5-.9.9-2.5z" opacity=".75"/></svg></button>
+  <a class="fab fab-wa" href="https://wa.me/919606298720" target="_blank" rel="noopener" aria-label="WhatsApp EBCA"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.2-.5 0-.2 0-.4-.1-.5-.1-.1-.6-1.5-.9-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.1.8.8-3-.2-.3C4 15 3.6 13.5 3.6 12 3.6 7.4 7.4 3.6 12 3.6S20.4 7.4 20.4 12 16.6 20.2 12 20.2z"/></svg></a>
+</div>
+
+<nav class="mobile-bar" aria-label="Quick actions">
+  <a href="tel:+919606298720"><b>📞</b>Call</a>
+  <a href="https://wa.me/919606298720" target="_blank" rel="noopener"><b>💬</b>WhatsApp</a>
+  <a href="#join" class="primary"><b>🪔</b>Join</a>
+</nav>
+
+<!-- ============ RECOMMENDER MODAL ============ -->
+<div class="overlay" id="fitOverlay" role="dialog" aria-modal="true" aria-labelledby="fitTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="fitTitle">✨ Find your fit</h3>
+      <button class="x-btn" data-close="fitOverlay" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body" id="fitBody"></div>
+  </div>
+</div>
+
+<!-- ============ ASSISTANT MODAL ============ -->
+<div class="overlay" id="aiOverlay" role="dialog" aria-modal="true" aria-labelledby="aiTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <span style="font-size:1.3rem">✨</span>
+      <h3 id="aiTitle">Ask EBCA</h3>
+      <button class="x-btn" data-close="aiOverlay" aria-label="Close">×</button>
+    </div>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="quick" id="quickChips"></div>
+    <div class="chat-input">
+      <input id="chatInput" type="text" placeholder="Ask about membership, sponsors, venue…" aria-label="Your question" autocomplete="off">
+      <button class="btn btn-brand btn-sm" id="chatSend">Send</button>
+    </div>
+    <p class="ai-note">Answers are drawn instantly from EBCA's own information, on your device — no data leaves your phone. For anything else, the team is one tap away on WhatsApp.</p>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -890,69 +1016,160 @@
   "use strict";
   var WA_NUMBER = "919606298720";
   var MAIL_TO = "info@ebcafamily.com";
+  var PAY_URL = "https://ebcafamily.com/2026/membership";
+  var OFFER_URL = "https://ebcafamily.com/2026/divine_offering";
+  var APP_URL = "https://saumyajitghosh-collab.github.io/ebca-membership/";
+  // Festival window — update these each year
+  var PUJA_START = new Date("2026-10-16T00:00:00+05:30");
+  var PUJA_END   = new Date("2026-10-21T23:59:59+05:30");
+  var PUJA_LABEL = "EBCA Maha Durga Puja 2026 · 16–21 October";
 
-  /* ---- year ---- */
-  document.getElementById("yr").textContent = new Date().getFullYear();
+  var $ = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
 
-  /* ---- mobile menu ---- */
-  var nav = document.getElementById("nav");
-  document.getElementById("menuBtn").addEventListener("click", function(){ nav.classList.toggle("open"); });
-  nav.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", function(){ nav.classList.remove("open"); }); });
+  /* ---------- year ---------- */
+  $("#yr").textContent = new Date().getFullYear();
 
-  /* ---- toast ---- */
-  var toastEl = document.getElementById("toast"), toastTimer;
+  /* ---------- toast ---------- */
+  var toastEl = $("#toast"), toastTimer;
   function toast(msg){
     toastEl.textContent = msg; toastEl.classList.add("show");
-    clearTimeout(toastTimer); toastTimer = setTimeout(function(){ toastEl.classList.remove("show"); }, 3200);
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toastEl.classList.remove("show"); }, 3200);
   }
 
-  /* ---- reveal on scroll ---- */
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
-  }, {threshold:.12});
-  document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+  /* ---------- theme ---------- */
+  var themeBtn = $("#themeBtn");
+  var ICON_SUN = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  var ICON_MOON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+  function applyTheme(t){
+    document.documentElement.setAttribute("data-theme", t);
+    themeBtn.innerHTML = t === "dark" ? ICON_SUN : ICON_MOON;
+    themeBtn.setAttribute("aria-label", t === "dark" ? "Switch to light theme" : "Switch to dark theme");
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if(meta) meta.setAttribute("content", t === "dark" ? "#131010" : "#7a0f1e");
+    try{ localStorage.setItem("ebca-theme", t); }catch(e){}
+  }
+  var savedTheme = null;
+  try{ savedTheme = localStorage.getItem("ebca-theme"); }catch(e){}
+  if(!savedTheme){
+    savedTheme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  applyTheme(savedTheme);
+  themeBtn.addEventListener("click", function(){
+    applyTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
+  });
 
-  /* ---- animated counters ---- */
+  /* ---------- mobile menu ---------- */
+  var nav = $("#nav"), menuBtn = $("#menuBtn");
+  menuBtn.addEventListener("click", function(){
+    var open = nav.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    menuBtn.textContent = open ? "×" : "☰";
+  });
+  $$("#nav a").forEach(function(a){
+    a.addEventListener("click", function(){
+      nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded","false"); menuBtn.textContent = "☰";
+    });
+  });
+
+  /* ---------- scroll progress ---------- */
+  var prog = $("#progress");
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+
+  /* ---------- reveal (fail-safe: JS opts in) ---------- */
+  if("IntersectionObserver" in window){
+    document.documentElement.classList.add("js-reveal");
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, {threshold:.1, rootMargin:"0px 0px -40px 0px"});
+    $$(".reveal").forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---------- counters ---------- */
   function animateCount(el){
     var target = parseInt(el.getAttribute("data-count"),10);
     var suffix = el.getAttribute("data-suffix") || "";
-    var dur = 1400, start = null;
     function fmt(n){
-      if(target >= 100000) return (n/100000).toFixed(n>=target?0:1).replace(/\.0$/,"") + "L";
+      if(target >= 100000) return (n/100000).toFixed(n >= target ? 0 : 1).replace(/\.0$/,"") + "L";
       return n.toLocaleString("en-IN");
     }
+    var dur = 1400, start = null;
     function step(ts){
       if(!start) start = ts;
-      var p = Math.min((ts-start)/dur, 1);
-      var eased = 1 - Math.pow(1-p, 3);
-      var val = Math.round(target*eased);
-      el.textContent = fmt(val) + suffix;
-      if(p < 1) requestAnimationFrame(step);
-      else el.textContent = fmt(target) + suffix;
+      var p = Math.min((ts-start)/dur, 1), eased = 1 - Math.pow(1-p, 3);
+      el.textContent = fmt(Math.round(target*eased)) + suffix;
+      if(p < 1) requestAnimationFrame(step); else el.textContent = fmt(target) + suffix;
     }
     requestAnimationFrame(step);
   }
-  var io2 = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ animateCount(e.target); io2.unobserve(e.target); } });
-  }, {threshold:.4});
-  document.querySelectorAll("[data-count]").forEach(function(el){ io2.observe(el); });
+  if("IntersectionObserver" in window){
+    var io2 = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ animateCount(e.target); io2.unobserve(e.target); } });
+    }, {threshold:.4});
+    $$("[data-count]").forEach(function(el){ io2.observe(el); });
+  } else {
+    $$("[data-count]").forEach(function(el){
+      el.textContent = (parseInt(el.getAttribute("data-count"),10) >= 100000
+        ? (parseInt(el.getAttribute("data-count"),10)/100000)+"L" : el.getAttribute("data-count")) + (el.getAttribute("data-suffix")||"");
+    });
+  }
 
-  /* ---- FAQ accordion ---- */
-  document.querySelectorAll(".qa button").forEach(function(btn){
+  /* ---------- countdown / status ---------- */
+  (function(){
+    var row = $("#countRow"), done = $("#ccDone"), label = $("#ccLabel");
+    function tick(){
+      var now = new Date();
+      if(now < PUJA_START){
+        var diff = Math.floor((PUJA_START - now)/1000);
+        var d = Math.floor(diff/86400), h = Math.floor(diff%86400/3600), m = Math.floor(diff%3600/60), s = diff%60;
+        $("#cd-d").textContent = String(d).padStart(2,"0");
+        $("#cd-h").textContent = String(h).padStart(2,"0");
+        $("#cd-m").textContent = String(m).padStart(2,"0");
+        $("#cd-s").textContent = String(s).padStart(2,"0");
+        label.textContent = "Counting down to " + PUJA_LABEL;
+      } else {
+        row.style.display = "none";
+        done.style.display = "block";
+        label.textContent = PUJA_LABEL;
+        done.innerHTML = now <= PUJA_END
+          ? "🪔 The Puja is live right now — see you at the pandal!"
+          : "🙏 Thank you for celebrating with us. Membership for the year ahead is open, and sponsorships for the next Puja are welcome.";
+      }
+    }
+    tick(); setInterval(tick, 1000);
+  })();
+
+  /* ---------- FAQ ---------- */
+  $$(".qa button").forEach(function(btn){
     btn.addEventListener("click", function(){
       var qa = btn.parentElement, isOpen = qa.classList.contains("open");
-      document.querySelectorAll(".qa.open").forEach(function(o){ o.classList.remove("open"); });
+      $$(".qa.open").forEach(function(o){ o.classList.remove("open"); });
       if(!isOpen) qa.classList.add("open");
     });
   });
 
-  /* ---- membership form ---- */
-  var form = document.getElementById("memberForm");
-  var typeSeg = document.getElementById("typeSeg");
-  var planSelect = document.getElementById("planSelect");
-  var memberCount = document.getElementById("memberCount");
-  var membersBox = document.getElementById("membersBox");
-  var memberRows = document.getElementById("memberRows");
+  /* ---------- modals ---------- */
+  function openModal(id){ $("#"+id).classList.add("show"); document.body.style.overflow="hidden"; }
+  function closeModal(id){ $("#"+id).classList.remove("show"); document.body.style.overflow=""; }
+  $$("[data-close]").forEach(function(b){ b.addEventListener("click", function(){ closeModal(b.getAttribute("data-close")); }); });
+  $$(".overlay").forEach(function(o){
+    o.addEventListener("click", function(e){ if(e.target === o) closeModal(o.id); });
+  });
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape") $$(".overlay.show").forEach(function(o){ closeModal(o.id); });
+  });
+
+  /* ================= MEMBERSHIP FORM ================= */
+  var form = $("#memberForm");
+  var typeSeg = $("#typeSeg"), planSelect = $("#planSelect"), memberCount = $("#memberCount");
+  var membersBox = $("#membersBox"), memberRows = $("#memberRows");
   var regType = "New";
 
   function planParts(){
@@ -964,20 +1181,19 @@
   function refresh(){
     var p = planParts();
     var isFamily = planSelect.value.indexOf("Family") === 0;
-    document.getElementById("sumPlan").textContent = p.name;
-    document.getElementById("sumType").textContent = regType === "New" ? "New Membership" : "Membership Renewal";
-    document.getElementById("sumAmount").textContent = inr(p.amount);
-    document.getElementById("formTitle").textContent = (regType === "New" ? "New Membership" : "Membership Renewal") + " Registration";
+    $("#sumPlan").textContent = p.name;
+    $("#sumType").textContent = regType === "New" ? "New Membership" : "Membership Renewal";
+    $("#sumAmount").textContent = inr(p.amount);
+    $("#formTitle").textContent = (regType === "New" ? "New Membership" : "Membership Renewal") + " Registration";
     membersBox.classList.toggle("show", isFamily);
-    document.getElementById("sumMembers").textContent = isFamily ? memberCount.value : "1";
+    $("#sumMembers").textContent = isFamily ? memberCount.value : "1";
+    saveState();
   }
 
   typeSeg.querySelectorAll("button").forEach(function(b){
     b.addEventListener("click", function(){
       typeSeg.querySelectorAll("button").forEach(function(x){ x.classList.remove("active"); });
-      b.classList.add("active");
-      regType = b.getAttribute("data-type");
-      refresh();
+      b.classList.add("active"); regType = b.getAttribute("data-type"); refresh();
     });
   });
   planSelect.addEventListener("change", function(){
@@ -987,7 +1203,6 @@
   });
   memberCount.addEventListener("change", refresh);
 
-  /* clear error state as the user corrects a field */
   form.querySelectorAll("input, select").forEach(function(el){
     var ev = el.tagName === "SELECT" ? "change" : "input";
     el.addEventListener(ev, function(){
@@ -996,24 +1211,66 @@
     });
   });
 
-  /* family member rows */
   function addMemberRow(name){
     var div = document.createElement("div");
     div.className = "member-row";
-    div.innerHTML =
-      '<input type="text" placeholder="Name" value="'+(name||"")+'">' +
+    div.innerHTML = '<input type="text" placeholder="Name" value="'+(name||"")+'">' +
       '<input type="text" placeholder="Relation (spouse, child…)">' +
       '<button type="button" class="rm" aria-label="Remove">×</button>';
-    div.querySelector(".rm").addEventListener("click", function(){ div.remove(); });
+    div.querySelector(".rm").addEventListener("click", function(){ div.remove(); saveState(); });
     memberRows.appendChild(div);
   }
-  document.getElementById("addMember").addEventListener("click", function(){
+  $("#addMember").addEventListener("click", function(){
     if(memberRows.children.length < 4) addMemberRow("");
     else toast("Up to 4 family members are covered in the Family plan.");
   });
-  addMemberRow("");
 
-  /* validation */
+  /* --- localStorage autosave --- */
+  var saveTimer;
+  function saveState(){
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function(){
+      try{
+        var rows = $$(".member-row", memberRows).map(function(r){
+          var ins = r.querySelectorAll("input");
+          return [ins[0].value, ins[1].value];
+        });
+        localStorage.setItem("ebca-form", JSON.stringify({
+          name: form.name.value, phone: form.phone.value, email: form.email.value,
+          apartment: form.apartment.value, plan: planSelect.value, members: memberCount.value,
+          regType: regType, rows: rows
+        }));
+      }catch(e){}
+    }, 400);
+  }
+  function loadState(){
+    var raw = null;
+    try{ raw = localStorage.getItem("ebca-form"); }catch(e){}
+    if(!raw) { addMemberRow(""); return; }
+    var s;
+    try{ s = JSON.parse(raw); }catch(e){ addMemberRow(""); return; }
+    if(s.name) form.name.value = s.name;
+    if(s.phone) form.phone.value = s.phone;
+    if(s.email) form.email.value = s.email;
+    if(s.apartment) form.apartment.value = s.apartment;
+    if(s.plan) planSelect.value = s.plan;
+    if(s.members) memberCount.value = s.members;
+    if(s.regType === "Renewal"){
+      regType = "Renewal";
+      typeSeg.querySelectorAll("button").forEach(function(b){
+        b.classList.toggle("active", b.getAttribute("data-type") === "Renewal");
+      });
+    }
+    if(s.rows && s.rows.length){
+      s.rows.forEach(function(r){ addMemberRow(r[0]); var last = memberRows.lastElementChild; last.querySelectorAll("input")[1].value = r[1] || ""; });
+    } else { addMemberRow(""); }
+    if(s.name || s.phone){ $("#savedHint").classList.add("show"); }
+  }
+  form.querySelectorAll("input, select").forEach(function(el){
+    el.addEventListener("input", saveState);
+    el.addEventListener("change", saveState);
+  });
+
   function markField(name, bad){
     var f = form.querySelector('[data-field="'+name+'"]');
     if(f) f.classList.toggle("invalid", bad);
@@ -1026,10 +1283,10 @@
     var bad = false;
     bad = markField("name", name.length < 2) || bad;
     bad = markField("phone", !(phone.length === 10 || (phone.length === 12 && phone.indexOf("91") === 0))) || bad;
-    if(email){ bad = markField("email", !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) || bad; } else { markField("email", false); }
+    if(email){ bad = markField("email", !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) || bad; }
+    else { markField("email", false); }
     return !bad;
   }
-
   function collect(){
     var p = planParts();
     var isFamily = planSelect.value.indexOf("Family") === 0;
@@ -1043,21 +1300,18 @@
     lines.push("Membership: " + p.name + " (" + inr(p.amount) + "/year)");
     if(isFamily){
       lines.push("Members covered: " + memberCount.value);
-      var rows = memberRows.querySelectorAll(".member-row");
       var names = [];
-      rows.forEach(function(r){
-        var ins = r.querySelectorAll("input");
-        var nm = ins[0].value.trim(), rel = ins[1].value.trim();
+      $$(".member-row", memberRows).forEach(function(r){
+        var ins = r.querySelectorAll("input"), nm = ins[0].value.trim(), rel = ins[1].value.trim();
         if(nm) names.push(nm + (rel ? " (" + rel + ")" : ""));
       });
       if(names.length) lines.push("Family members: " + names.join(", "));
     }
     lines.push("");
-    lines.push("Payment link: https://ebcafamily.com/2026/membership");
+    lines.push("Payment link: " + PAY_URL);
     lines.push("Requested on: " + new Date().toLocaleDateString("en-IN"));
     return lines.join("\n");
   }
-
   function requireValid(){
     if(!validate()){
       toast("Please check the highlighted fields.");
@@ -1067,24 +1321,18 @@
     }
     return true;
   }
-
-  document.getElementById("sendWa").addEventListener("click", function(){
+  $("#sendWa").addEventListener("click", function(){
     if(!requireValid()) return;
-    var url = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(collect());
-    window.open(url, "_blank");
+    window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(collect()), "_blank");
     toast("Opening WhatsApp with your request…");
   });
-
-  document.getElementById("sendMail").addEventListener("click", function(){
+  $("#sendMail").addEventListener("click", function(){
     if(!requireValid()) return;
-    var p = planParts();
     var subject = "EBCA " + (regType === "New" ? "New Membership" : "Renewal") + " — " + form.name.value.trim();
-    var body = collect().replace(/\*/g,"");
-    window.location.href = "mailto:" + MAIL_TO + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    window.location.href = "mailto:" + MAIL_TO + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(collect().replace(/\*/g,""));
     toast("Opening your email app…");
   });
-
-  document.getElementById("copyBtn").addEventListener("click", function(){
+  $("#copyBtn").addEventListener("click", function(){
     if(!requireValid()) return;
     var text = collect().replace(/\*/g,"");
     function done(){ toast("Membership details copied."); }
@@ -1099,34 +1347,344 @@
     document.body.removeChild(ta);
   }
 
-  /* plan buttons preselect + scroll */
-  document.querySelectorAll("[data-plan]").forEach(function(b){
+  $$("[data-plan]").forEach(function(b){
     b.addEventListener("click", function(){
-      var plan = b.getAttribute("data-plan");
-      planSelect.value = plan === "Solo" ? "Solo|3001" : "Family|4501";
-      if(plan === "Solo") memberCount.value = "1";
+      planSelect.value = b.getAttribute("data-plan") === "Solo" ? "Solo|3001" : "Family|4501";
+      if(planSelect.value.indexOf("Solo") === 0) memberCount.value = "1";
       refresh();
-      document.getElementById("join").scrollIntoView({behavior:"smooth"});
+      $("#join").scrollIntoView({behavior:"smooth"});
       setTimeout(function(){ form.name.focus({preventScroll:true}); }, 600);
     });
   });
 
-  /* sponsor enquiry */
+  /* ================= SPONSOR ENQUIRY ================= */
   function sponsorMessage(tier){
-    var msg = "*EBCA Sponsorship Enquiry*\n\n" +
+    return "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(
+      "*EBCA Sponsorship Enquiry*\n\n" +
       (tier ? "Interested tier: " + tier + "\n" : "Interested in: Sponsorship\n") +
       "\nName: \nOrganisation: \nPhone: \n\n" +
-      "Please share the sponsorship deck and next steps.";
-    return "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);
+      "Please share the sponsorship deck and next steps."
+    );
   }
-  document.querySelectorAll("[data-sponsor]").forEach(function(b){
-    b.addEventListener("click", function(){
-      window.open(sponsorMessage(b.getAttribute("data-sponsor")), "_blank");
-    });
+  $$("[data-sponsor]").forEach(function(b){
+    b.addEventListener("click", function(){ window.open(sponsorMessage(b.getAttribute("data-sponsor")), "_blank"); });
   });
-  document.getElementById("sponsorWa").setAttribute("href", sponsorMessage(""));
 
+  /* ================= SPONSOR CALCULATOR ================= */
+  var TIERS = [
+    {min:0,      max:24999,     name:"Shakti",     note:"Individual & small business",
+     benefits:["Name on digital wall of fame","Social media shoutout","Special mention during event","Prasad hamper"]},
+    {min:25000,  max:99999,     name:"Sanskriti",  note:"Silver Partner",
+     benefits:["Logo on event banner","Social media campaign","Stage mention (3×)","2 VIP passes","Prasad hamper + memento"]},
+    {min:100000, max:499999,    name:"Mahotsav",   note:"Gold Partner",
+     benefits:["Premium logo on pandal","Dedicated social posts","Stage mention (5×)","5 VIP passes + parking","Stall / booth space","Media coverage mention"]},
+    {min:500000, max:Infinity,  name:"Adya Shakti",note:"Title Sponsor",
+     benefits:["Title sponsorship rights","Prime branding across all assets","Stage naming rights","10 VIP passes + reserved parking","Premium stall space","Press release & media coverage","Recognition ceremony"]}
+  ];
+  function tierFor(v){
+    for(var i=0;i<TIERS.length;i++){ if(v >= TIERS[i].min && v <= TIERS[i].max) return TIERS[i]; }
+    return TIERS[0];
+  }
+  var calcRange = $("#calcRange");
+  function updateCalc(){
+    var v = parseInt(calcRange.value,10);
+    var t = tierFor(v);
+    $("#calcAmt").textContent = inr(v);
+    $("#calcTier").textContent = t.name;
+    $("#calcNote").textContent = t.note;
+    $("#calcBenefits").innerHTML = t.benefits.map(function(b){ return "<li>"+b+"</li>"; }).join("");
+  }
+  calcRange.addEventListener("input", updateCalc);
+  $("#calcEnquire").addEventListener("click", function(){
+    var v = parseInt(calcRange.value,10), t = tierFor(v);
+    window.open(sponsorMessage(t.name + " — budget " + inr(v)), "_blank");
+  });
+  updateCalc();
+
+  /* ================= RECOMMENDER ================= */
+  var fitBody = $("#fitBody");
+  function fitStep1(){
+    fitBody.innerHTML =
+      '<div class="step-dots"><i class="on"></i><i></i></div>' +
+      '<p style="font-size:.95rem;margin-bottom:14px;font-weight:600">What brings you to EBCA today?</p>' +
+      '<button class="opt" data-go="member">🪔 I want to join or renew<small>Membership for me or my family</small></button>' +
+      '<button class="opt" data-go="sponsor">🤝 I run a business<small>I want brand visibility and goodwill</small></button>' +
+      '<button class="opt" data-go="seva">🙏 I want to make a seva offering<small>Contribute to the Puja</small></button>';
+    bindFit();
+  }
+  function fitMember(){
+    fitBody.innerHTML =
+      '<div class="step-dots"><i class="on"></i><i class="on"></i></div>' +
+      '<p style="font-size:.95rem;margin-bottom:14px;font-weight:600">How many people are joining?</p>' +
+      '<button class="opt" data-res="solo">Just me<small>Solo Membership — ₹3,001 / year</small></button>' +
+      '<button class="opt" data-res="family">2 to 4 of us<small>Family Membership — ₹4,501 / year</small></button>';
+    bindFit();
+  }
+  function fitSponsor(){
+    fitBody.innerHTML =
+      '<div class="step-dots"><i class="on"></i><i class="on"></i></div>' +
+      '<p style="font-size:.95rem;margin-bottom:14px;font-weight:600">Roughly what budget did you have in mind?</p>' +
+      '<button class="opt" data-res="s1">Under ₹25,000<small>Shakti tier</small></button>' +
+      '<button class="opt" data-res="s2">₹25,000 – ₹1,00,000<small>Sanskriti tier</small></button>' +
+      '<button class="opt" data-res="s3">₹1,00,000 – ₹5,00,000<small>Mahotsav tier</small></button>' +
+      '<button class="opt" data-res="s4">₹5,00,000+<small>Adya Shakti — title sponsor</small></button>';
+    bindFit();
+  }
+  function fitResult(key){
+    var html;
+    if(key === "solo"){
+      html = resultHTML("Solo Membership","Individual registration — ₹3,001 / year","Best if it's just you joining. You get priority access to Durga Puja and cultural programmes, volunteer and networking opportunities, and birthday wishes.",
+        '<button class="btn btn-brand btn-block" data-act="go-solo">Go to Solo membership →</button>');
+    } else if(key === "family"){
+      html = resultHTML("Family Membership","Up to 4 members — ₹4,501 / year","Best for a household. Covers spouse and children, adds every family member to our celebration wall, and gives family seating at events.",
+        '<button class="btn btn-gold btn-block" data-act="go-family">Go to Family membership →</button>');
+    } else if(key === "seva"){
+      html = resultHTML("Bhakti Samarpan","Divine Offering — your choice of amount","Join us in making a Seva offering to Maa Durga and be part of our Puja celebrations.",
+        '<a class="btn btn-brand btn-block" href="'+OFFER_URL+'" target="_blank" rel="noopener">Make a seva offering →</a>');
+    } else {
+      var map = {s1:TIERS[0], s2:TIERS[1], s3:TIERS[2], s4:TIERS[3]};
+      var t = map[key];
+      html = resultHTML(t.name + " sponsorship", t.note + " · " + (key==="s4"?"Title Sponsor":"₹"+t.min.toLocaleString("en-IN")+"+"),
+        "At this level you get: " + t.benefits.join(", ") + ".",
+        '<button class="btn btn-gold btn-block" data-act="go-sponsor" data-tier="'+t.name+'">Talk to the sponsorship team →</button>');
+    }
+    fitBody.innerHTML = html;
+    bindFit();
+  }
+  function resultHTML(title, sub, body, cta){
+    return '<div class="result-card"><div class="rc-tag">Our recommendation</div><h4>'+title+'</h4>' +
+      '<p style="font-weight:600;color:var(--text)">'+sub+'</p><p>'+body+'</p>'+cta+'</div>' +
+      '<button class="opt" style="margin-top:14px;text-align:center" data-go="restart">↺ Start over</button>';
+  }
+  function bindFit(){
+    $$("[data-go]", fitBody).forEach(function(b){
+      b.addEventListener("click", function(){
+        var g = b.getAttribute("data-go");
+        if(g === "member") fitMember();
+        else if(g === "sponsor") fitSponsor();
+        else if(g === "seva") fitResult("seva");
+        else if(g === "restart") fitStep1();
+      });
+    });
+    $$("[data-res]", fitBody).forEach(function(b){
+      b.addEventListener("click", function(){ fitResult(b.getAttribute("data-res")); });
+    });
+    $$("[data-act]", fitBody).forEach(function(b){
+      b.addEventListener("click", function(){
+        var a = b.getAttribute("data-act");
+        closeModal("fitOverlay");
+        if(a === "go-solo"){ planSelect.value = "Solo|3001"; memberCount.value = "1"; refresh(); $("#join").scrollIntoView({behavior:"smooth"}); }
+        else if(a === "go-family"){ planSelect.value = "Family|4501"; refresh(); $("#join").scrollIntoView({behavior:"smooth"}); }
+        else if(a === "go-sponsor"){ window.open(sponsorMessage(b.getAttribute("data-tier")), "_blank"); }
+      });
+    });
+  }
+  $("#fitBtn").addEventListener("click", function(){ fitStep1(); openModal("fitOverlay"); });
+
+  /* ================= ASK EBCA ASSISTANT ================= */
+  var KB = [
+    {t:"Membership plans and fees", k:["membership","plan","fee","cost","price","charge","how much","fees","join","member"],
+     a:"EBCA has two annual plans:\n\n• Solo — ₹3,001/year (individual)\n• Family — ₹4,501/year (up to 4 members, including spouse and children)\n\nMembership runs one year from the date you join or renew.",
+     act:[["See plans","#membership"],["Join / Renew","#join"]]},
+    {t:"How to pay", k:["pay","payment","upi","card","netbanking","net banking","gateway","portal","online","fee payment"],
+     a:"Payment is made on EBCA's secure portal, which supports UPI, credit/debit cards and net banking. Open the payment page below, or pay at the EBCA membership desk.",
+     act:[["Pay on EBCA portal",PAY_URL]]},
+    {t:"Renewing membership", k:["renew","renewal","existing member","continue","expire","expiry"],
+     a:"To renew, open the Join / Renew form, choose “Renewal”, pick your plan and send your request. Your membership continues for another year.",
+     act:[["Renew now","#join"]]},
+    {t:"What membership includes", k:["include","benefit","get","perks","advantages","what do i get"],
+     a:"Members get priority access to Durga Puja events and cultural programmes, volunteer and networking opportunities, birthday & anniversary wishes, and exclusive member benefits.",
+     act:[["See plans","#membership"]]},
+    {t:"Family membership coverage", k:["family","spouse","children","how many","cover","members","household"],
+     a:"Family Membership covers up to 4 members including spouse and children, and adds every family member to our celebration wall.",
+     act:[["See plans","#membership"]]},
+    {t:"Birthday and anniversary wishes", k:["birthday","anniversary","wish","wishes","special day"],
+     a:"Yes! Add your family members' names in the Join / Renew form and we'll place them on the EBCA celebration wall and wish them on their special days.",
+     act:[["Add family members","#join"]]},
+    {t:"Durga Puja dates", k:["date","dates","when","durga puja","pujo","2026","october","schedule","timing"],
+     a:"EBCA Maha Durga Puja 2026 ran from 16 to 21 October 2026 — six days of rituals, culture and community at Whitefield, Bengaluru. Membership for the year ahead is open now.",
+     act:[["See the festival","#festival"]]},
+    {t:"Venue and address", k:["venue","address","where","location","located","place","katamnallur","whitefield"],
+     a:"The venue is Sri Manjunatha Swamy Kalyana Mantapa, Katamnallur, Whitefield, Bengaluru – 560049.",
+     act:[["Open in Google Maps","https://maps.google.com/?q=Sri+Manjunatha+Swamy+Kalyana+Mantapa+Katamnallur+Whitefield+Bengaluru+560049"]]},
+    {t:"How to reach", k:["reach","metro","bus","travel","directions","route","how to get","bmrc","bmtc"],
+     a:"By metro: 3 km from Whitefield Metro (Purple Line).\nBy bus: BMTC 304, 305, 306 at Katamnallur Cross.\nBy road: about 15 min from Marathahalli, 20 min from KR Puram.\nParking: free for 5,000+ vehicles.",
+     act:[["Directions","https://maps.google.com/?q=Sri+Manjunatha+Swamy+Kalyana+Mantapa+Katamnallur+Whitefield+Bengaluru+560049"]]},
+    {t:"Parking", k:["parking","park","car","vehicle"],
+     a:"Yes — EBCA offers free parking for 5,000+ vehicles at the venue."},
+    {t:"Entry fee", k:["entry","ticket","fee entry","free","ticket price","pass"],
+     a:"Entry to EBCA Durga Puja is completely FREE for all visitors, and Bhog Prasad is served free every day."},
+    {t:"Bhog timings", k:["bhog","food","prasad","lunch","meal","khichuri","eat"],
+     a:"Bhog Prasad timings:\n\n• Daily Bhog — 11:30 AM to 1:00 PM (Khichuri, Labra, Papad, Chutney)\n• Ashtami & Navami Special — 2:00 to 4:00 PM (adds Beguni, Payesh, Mishti Doi)\n• Evening Prasad — 7:00 to 8:30 PM (Luchi, Alur Dom, Payesh)"},
+    {t:"Sponsorship tiers", k:["sponsor","sponsorship","tier","package","partner","brand","advertise","visibility","corporate"],
+     a:"Sponsorship tiers:\n\n• Shakti — ₹12,000–₹25,000\n• Sanskriti — ₹25,000–₹1,00,000\n• Mahotsav — ₹1,00,000–₹5,00,000\n• Adya Shakti — title sponsorship\n\nTry the budget tool on the sponsorship section to see what each level includes.",
+     act:[["Sponsorship section","#sponsors"]]},
+    {t:"Sponsorship contact", k:["sponsor contact","sponsorship email","talk to sponsor","partnership contact"],
+     a:"Reach the sponsorship team at sponsorship@ebcafamily.com or call/WhatsApp +91 96062 98720.",
+     act:[["Email sponsorship","mailto:sponsorship@ebcafamily.com"],["WhatsApp","https://wa.me/919606298720"]]},
+    {t:"Volunteering", k:["volunteer","help","seva work","join team","contribute time"],
+     a:"We'd love your help! Volunteers support crowd management, food distribution, cultural programmes and more. Email volunteer@ebcafamily.com or call +91 96062 98720.",
+     act:[["Email volunteers","mailto:volunteer@ebcafamily.com"]]},
+    {t:"Divine offering / seva", k:["offering","seva","samarpan","bhakti","donate","donation","contribute","divine"],
+     a:"Bhakti Samarpan is our divine offering for the EBCA Maha Durga Puja — join us in making a seva offering to Maa Durga. For queries, contact Krishanu (+91 98305 97671) or Nilanjan (+91 98860 50873).",
+     act:[["Make an offering",OFFER_URL],["WhatsApp Krishanu","https://wa.me/919830597671"]]},
+    {t:"Contact EBCA", k:["contact","phone","number","call","email","whatsapp","reach you"],
+     a:"You can reach EBCA at:\n\n📞 +91 96062 98720 (10 AM – 8 PM daily)\n✉️ info@ebcafamily.com\n💬 WhatsApp: +91 96062 98720",
+     act:[["Call now","tel:+919606298720"],["WhatsApp","https://wa.me/919606298720"]]},
+    {t:"Office hours", k:["hours","timing office","open","office","when open"],
+     a:"EBCA office hours: Monday–Saturday 10:00 AM – 8:00 PM, Sunday 10:00 AM – 4:00 PM. During Puja days the helpdesk runs 9:00 AM – 10:00 PM."},
+    {t:"About EBCA", k:["about","who","what is ebca","history","organisation","organization","founded","established"],
+     a:"EBCA — East Bengaluru Cultural Association — is a socio-cultural philanthropic organisation incepted in 2016. It hosts one of Bangalore's biggest Durga Pujas, known as the “Maddox Square of Bangalore”, serving the Whitefield–KR Puram corridor.",
+     act:[["About EBCA","#about"]]},
+    {t:"Awards and recognition", k:["award","awards","recognition","media","press","news","hindu","times of india"],
+     a:"EBCA has 37+ national and global awards and 45+ media features. Highlights include the Sharod Utsav Samman Global Awards (Best Venue & Best Publicity) and the Times of India Durga Puja Innovation Award.",
+     act:[["About EBCA","#about"]]},
+    {t:"Cultural programmes", k:["cultural","baul","patachitra","book","books","dandiya","dhunuchi","music","programme","program"],
+     a:"The festival includes the Baul Akhara, Patachitra art, a College Street book fair with 5,000+ Bengali books, Dhunuchi Naach, Dandiya nights with RED FM, and EBCA Talent Night."},
+    {t:"Facilities for families and kids", k:["kids","children","family facilities","senior","lactation","play zone","facilities"],
+     a:"EBCA provides a kids play zone, a senior-care and lactation lounge, a cultural & shopping zone, food street, and free parking for 5,000+ vehicles."},
+    {t:"Book a stall", k:["stall","booth","vendor","sell","shop","food stall","business stall"],
+     a:"The festival hosts 100+ food and craft stalls. To book a stall or booth, contact sponsorship@ebcafamily.com or call +91 96062 98720.",
+     act:[["Email sponsorship","mailto:sponsorship@ebcafamily.com"]]},
+    {t:"Rituals", k:["ritual","puja","pushpanjali","sandhi","kumari","chandi","pandit","priest"],
+     a:"Sacred rituals include Chandi Path, Pushpanjali, Sandhi Puja (108 diyas lit) and Kumari Puja — guided by Sri Sibaprosad Mukhopadhyay, following the traditional Bengali calendar."}
+  ];
+
+  var chatBody = $("#chatBody"), chatInput = $("#chatInput");
+  function addMsg(text, who, actions){
+    var d = document.createElement("div");
+    d.className = "msg " + who;
+    d.textContent = text;
+    if(actions && actions.length){
+      var box = document.createElement("div");
+      box.className = "msg-actions";
+      actions.forEach(function(a){
+        var link = document.createElement("a");
+        link.href = a[1]; link.textContent = a[0];
+        if(a[1].indexOf("http") === 0) { link.target = "_blank"; link.rel = "noopener"; }
+        box.appendChild(link);
+      });
+      d.appendChild(box);
+    }
+    chatBody.appendChild(d);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    return d;
+  }
+  function typing(){
+    var d = document.createElement("div");
+    d.className = "msg bot typing"; d.innerHTML = "<i></i><i></i><i></i>";
+    chatBody.appendChild(d); chatBody.scrollTop = chatBody.scrollHeight;
+    return d;
+  }
+  function norm(s){ return (" " + s.toLowerCase().replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ") + " "); }
+  function answer(q){
+    var n = norm(q), tokens = n.trim().split(" ").filter(function(t){ return t.length > 2; });
+    if(!tokens.length) return null;
+    var best = null, bestScore = 0;
+    KB.forEach(function(entry){
+      var score = 0;
+      entry.k.forEach(function(key){
+        var kk = norm(key).trim();
+        if(kk.indexOf(" ") > -1){
+          if(n.indexOf(" " + kk + " ") > -1 || n.indexOf(kk) > -1) score += 4;
+        }
+        tokens.forEach(function(tok){
+          if(kk === tok) score += 3;
+          else if(kk.indexOf(tok) > -1 || tok.indexOf(kk) > -1) score += 1.5;
+        });
+      });
+      tokens.forEach(function(tok){
+        if(entry.t.toLowerCase().indexOf(tok) > -1) score += 1;
+      });
+      if(score > bestScore){ bestScore = score; best = entry; }
+    });
+    return bestScore >= 3 ? best : null;
+  }
+  function respond(q){
+    var t = typing();
+    setTimeout(function(){
+      chatBody.removeChild(t);
+      var hit = answer(q);
+      if(hit){ addMsg(hit.a, "bot", hit.act); }
+      else {
+        addMsg("I don't have that one to hand. For anything specific, the EBCA team will help you directly — they're quick on WhatsApp.\n\nYou could also try asking about membership fees, payment, sponsorship tiers, the venue, bhog timings or volunteering.", "bot",
+          [["WhatsApp the team","https://wa.me/919606298720"],["Call +91 96062 98720","tel:+919606298720"]]);
+      }
+    }, 380);
+  }
+  function sendChat(text){
+    var q = (text || chatInput.value).trim();
+    if(!q) return;
+    addMsg(q, "me");
+    chatInput.value = "";
+    respond(q);
+  }
+  var QUICK = ["Membership fees","How do I pay?","Sponsorship tiers","Venue & directions","Bhog timings","Volunteer with us"];
+  function renderQuick(){
+    $("#quickChips").innerHTML = QUICK.map(function(q){
+      return '<button type="button" data-q="'+q+'">'+q+'</button>';
+    }).join("");
+    $$("#quickChips button").forEach(function(b){
+      b.addEventListener("click", function(){ sendChat(b.getAttribute("data-q")); });
+    });
+  }
+  $("#chatSend").addEventListener("click", function(){ sendChat(); });
+  chatInput.addEventListener("keydown", function(e){ if(e.key === "Enter"){ e.preventDefault(); sendChat(); } });
+  function openAssistant(){
+    if(!chatBody.childElementCount){
+      addMsg("Namaskar! 🙏 I'm the EBCA assistant. Ask me about membership, sponsorship, the venue, bhog timings — anything EBCA.", "bot");
+    }
+    renderQuick();
+    openModal("aiOverlay");
+    setTimeout(function(){ chatInput.focus(); }, 260);
+  }
+  $("#aiFab").addEventListener("click", openAssistant);
+
+  /* ================= SHARE ================= */
+  $("#shareBtn").addEventListener("click", function(){
+    var data = { title:"EBCA Companion", text:"Membership, sponsorship & seva for East Bengaluru Cultural Association", url: APP_URL };
+    if(navigator.share){
+      navigator.share(data).catch(function(){});
+    } else if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(APP_URL).then(function(){ toast("Link copied — share it anywhere."); });
+    } else { toast(APP_URL); }
+  });
+
+  /* ================= ADD TO CALENDAR ================= */
+  $("#calBtn").addEventListener("click", function(){
+    function icsDate(d){ return d.toISOString().slice(0,10).replace(/-/g,""); }
+    var end = new Date(PUJA_END.getTime());
+    var ics = [
+      "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//EBCA Companion//EN","CALSCALE:GREGORIAN",
+      "BEGIN:VEVENT",
+      "UID:ebca-durga-puja-2026@ebcafamily.com",
+      "DTSTAMP:" + icsDate(new Date()) + "T000000Z",
+      "DTSTART;VALUE=DATE:" + icsDate(PUJA_START),
+      "DTEND;VALUE=DATE:" + icsDate(new Date(end.getTime() + 86400000)),
+      "SUMMARY:EBCA Maha Durga Puja 2026",
+      "LOCATION:Sri Manjunatha Swamy Kalyana Mantapa\\, Katamnallur\\, Whitefield\\, Bengaluru 560049",
+      "DESCRIPTION:Six days of authentic rituals\\, culture and community. Free entry and free bhog for all. ebcafamily.com",
+      "END:VEVENT","END:VCALENDAR"
+    ].join("\r\n");
+    var blob = new Blob([ics], {type:"text/calendar"});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "ebca-durga-puja-2026.ics";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1500);
+    toast("Calendar file downloaded.");
+  });
+
+  /* ================= INIT ================= */
+  loadState();
   refresh();
+
+  /* service worker (offline support) */
+  if("serviceWorker" in navigator && location.protocol === "https:"){
+    window.addEventListener("load", function(){
+      navigator.serviceWorker.register("sw.js").catch(function(){});
+    });
+  }
 })();
 </script>
 </body>

@@ -1,0 +1,26 @@
+{
+  "name": "EBCA Companion — Membership, Sponsorship & Seva",
+  "short_name": "EBCA",
+  "description": "Join or renew EBCA membership, partner as a sponsor, or make a seva offering. East Bengaluru Cultural Association, Whitefield, Bengaluru.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fbf7f0",
+  "theme_color": "#7a0f1e",
+  "lang": "en-IN",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
