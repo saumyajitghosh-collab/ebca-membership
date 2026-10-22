@@ -2,11 +2,11 @@
    Serves the companion app, the Receipt Desk, offline caching,
    and the Web Share Target that receives receipts shared from WhatsApp. */
 
-var CACHE = "ebca-v2";
+var CACHE = "ebca-v3";
 var SHARE = "ebca-desk-share";
 var ASSETS = [
   "./", "./index.html", "./receipts.html",
-  "./manifest.webmanifest", "./desk-manifest.webmanifest",
+  "./manifest.webmanifest", "./receipts.html",
   "./icon-192.png", "./icon-512.png"
 ];
 
@@ -41,7 +41,7 @@ self.addEventListener("fetch", function (event) {
      accept a POST, so the worker catches it, parks the files in the
      cache, and redirects to a normal GET that the page can read. */
   if (req.method === "POST" && url.origin === self.location.origin &&
-      url.pathname.indexOf("receipts.html") > -1) {
+      (url.pathname.indexOf("index.html") > -1 || url.pathname.indexOf("receipts.html") > -1)) {
     event.respondWith((async function () {
       try {
         var form = await req.formData();
@@ -64,9 +64,9 @@ self.addEventListener("fetch", function (event) {
             })
           );
         }
-        return Response.redirect(new URL("./receipts.html?shared=1", self.location).href, 303);
+        return Response.redirect(new URL("./index.html?shared=1", self.location).href, 303);
       } catch (err) {
-        return Response.redirect(new URL("./receipts.html?share_error=1", self.location).href, 303);
+        return Response.redirect(new URL("./index.html?share_error=1", self.location).href, 303);
       }
     })());
     return;
