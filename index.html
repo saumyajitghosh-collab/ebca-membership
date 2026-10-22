@@ -272,6 +272,15 @@
   .summary .s-row.total{border-top:1px dashed rgba(109,13,28,.25);margin-top:8px;padding-top:12px;font-weight:700;font-size:1.08rem;color:var(--maroon)}
   .form-actions{display:flex;flex-wrap:wrap;gap:12px}
   .form-actions .btn{flex:1 1 200px}
+  .pay-panel{
+    display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
+    background:linear-gradient(135deg,var(--maroon),#570a15);color:#fff;
+    border-radius:16px;padding:18px 22px;margin:0 0 20px;
+  }
+  .pay-panel .pp-text{display:flex;flex-direction:column;gap:2px;min-width:200px}
+  .pay-panel .pp-text b{font-size:1rem;color:var(--gold-2)}
+  .pay-panel .pp-text span{font-size:.83rem;color:rgba(255,255,255,.8)}
+  .pay-panel .btn{flex:0 0 auto}
   .note{font-size:.8rem;color:var(--ink-soft);margin-top:16px;display:flex;gap:9px;align-items:flex-start}
   .toast{
     position:fixed;left:50%;bottom:26px;transform:translate(-50%,120%);z-index:200;
@@ -592,6 +601,14 @@
             <div class="s-row total"><span>Amount payable</span><span id="sumAmount">₹4,501</span></div>
           </div>
 
+          <div class="pay-panel">
+            <div class="pp-text">
+              <b>Ready to pay?</b>
+              <span>Complete your membership fee on EBCA's secure payment portal — UPI, cards &amp; net banking.</span>
+            </div>
+            <a class="btn btn-gold" href="https://ebcafamily.com/2026/membership" target="_blank" rel="noopener">Pay on EBCA portal →</a>
+          </div>
+
           <div class="form-actions">
             <button type="button" class="btn btn-wa" id="sendWa">📲 Send request on WhatsApp</button>
             <button type="button" class="btn btn-maroon" id="sendMail">✉️ Send by email</button>
@@ -600,7 +617,7 @@
 
           <p class="note">
             <span>🔒</span>
-            <span>Nothing is stored on this page. Tapping a button opens your own WhatsApp/email app with a pre-filled message addressed to the EBCA membership desk. Payment is completed on EBCA's secure gateway (UPI, cards, net banking).</span>
+            <span>Nothing is stored on this page. Tapping a button opens your own WhatsApp/email app with a pre-filled message addressed to the EBCA membership desk. Complete payment on EBCA's secure portal (<a href="https://ebcafamily.com/2026/membership" target="_blank" rel="noopener" style="color:var(--crimson);font-weight:600">ebcafamily.com/2026/membership</a>) — UPI, cards &amp; net banking.</span>
           </p>
         </form>
       </div>
@@ -728,7 +745,7 @@
       </div>
       <div class="qa">
         <button>How do I pay for membership?<span class="ic">+</span></button>
-        <div class="ans"><p>After submitting your details, the EBCA team shares our secure payment portal supporting UPI, credit/debit cards, and net banking. You can also pay at the EBCA membership desk.</p></div>
+        <div class="ans"><p>Complete your fee on EBCA's secure payment portal at <a href="https://ebcafamily.com/2026/membership" target="_blank" rel="noopener" style="color:var(--crimson);font-weight:600">ebcafamily.com/2026/membership</a>, which supports UPI, credit/debit cards and net banking. You can also pay at the EBCA membership desk.</p></div>
       </div>
       <div class="qa">
         <button>Will my family members receive birthday / anniversary wishes?<span class="ic">+</span></button>
@@ -760,6 +777,7 @@
         <div class="c-line"><span class="ci">📞</span><span><b>+91 96062 98720</b><span>Available 10 AM – 8 PM, daily</span></span></div>
         <div class="c-line"><span class="ci">✉️</span><span><b><a href="mailto:info@ebcafamily.com">info@ebcafamily.com</a></b><span>General inquiries &amp; membership</span></span></div>
         <div class="c-line"><span class="ci">💬</span><span><b><a href="https://wa.me/919606298720" target="_blank" rel="noopener">Chat on WhatsApp</a></b><span>Instant help &amp; puja updates</span></span></div>
+        <div class="c-line"><span class="ci">💳</span><span><b><a href="https://ebcafamily.com/2026/membership" target="_blank" rel="noopener">Pay membership fee online</a></b><span>EBCA secure portal — UPI, cards, net banking</span></span></div>
         <div class="c-line"><span class="ci">🌐</span><span><b><a href="https://ebcafamily.com" target="_blank" rel="noopener">ebcafamily.com</a></b><span>Official EBCA website</span></span></div>
       </div>
       <div class="contact-card">
@@ -790,6 +808,7 @@
         <a href="#membership">Membership plans</a>
         <a href="#join">Join / Renew</a>
         <a href="#sponsors">Sponsorship</a>
+        <a href="https://ebcafamily.com/2026/membership" target="_blank" rel="noopener">Pay online</a>
         <a href="#faq">FAQ</a>
       </div>
       <div>
@@ -978,6 +997,7 @@
       if(names.length) lines.push("Family members: " + names.join(", "));
     }
     lines.push("");
+    lines.push("Payment link: https://ebcafamily.com/2026/membership");
     lines.push("Requested on: " + new Date().toLocaleDateString("en-IN"));
     return lines.join("\n");
   }
