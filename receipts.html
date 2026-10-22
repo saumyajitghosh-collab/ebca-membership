@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en-IN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EBCA Receipt Desk — vendor advance tracker</title>
+<meta name="description" content="Internal tool: turn payment receipts and bank statements into a clean vendor advance ledger.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#7a0f1e">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%237a0f1e'/><text y='72' x='50' text-anchor='middle' font-size='58' fill='%23f0c24b' font-family='serif'>&#8377;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Tiro+Bangla&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf7f0;--bg-2:#f4ece0;--surface:#fff;--surface-2:#fffdf9;
+  --text:#241418;--muted:#6b585b;--border:rgba(109,13,28,.13);
+  --brand:#7a0f1e;--brand-2:#a5142c;--brand-soft:rgba(122,15,30,.07);
+  --gold:#d4a017;--gold-2:#f0c24b;--gold-soft:#f7e3b0;
+  --green:#0f7b52;--red:#c0263c;--amber:#b7791f;--wa:#1faf54;
+  --shadow:0 20px 50px -22px rgba(109,13,28,.4);--shadow-sm:0 8px 22px -14px rgba(109,13,28,.3);
+  --radius:18px;--maxw:1240px;
+}
+[data-theme="dark"]{
+  --bg:#131010;--bg-2:#1a1514;--surface:#211a19;--surface-2:#271f1d;
+  --text:#f7f0e7;--muted:#bdaca4;--border:rgba(240,194,75,.16);
+  --brand:#c8354f;--brand-2:#e0485f;--brand-soft:rgba(240,194,75,.08);
+  --gold:#e8b73a;--gold-2:#f4cd63;--gold-soft:#5a4413;
+  --green:#39c48d;--red:#ff6b81;--amber:#e0a63c;
+  --shadow:0 20px 50px -22px rgba(0,0,0,.75);--shadow-sm:0 8px 22px -14px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+a{color:var(--brand-2);text-decoration:none}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
+h1,h2,h3{line-height:1.2;letter-spacing:-.02em}
+header.top{position:sticky;top:0;z-index:50;background:var(--surface);border-bottom:1px solid var(--border)}
+header.top .wrap{display:flex;align-items:center;gap:14px;height:64px}
+.logo{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,var(--gold-2),var(--gold) 62%,#a97a0d);color:#5e0b18;font-weight:800;font-size:1.05rem}
+.brand b{font-size:.97rem;display:block}
+.brand small{font-size:.66rem;color:var(--muted);display:block;line-height:1.15}
+.spacer{margin-left:auto}
+.btn{display:inline-flex;align-items:center;gap:8px;justify-content:center;padding:11px 18px;border-radius:12px;font-weight:600;font-size:.9rem;cursor:pointer;border:0;font-family:inherit;transition:.18s}
+.btn:active{transform:translateY(1px)}
+.btn-brand{background:linear-gradient(135deg,var(--brand-2),var(--brand));color:#fff}
+.btn-gold{background:linear-gradient(135deg,var(--gold-2),var(--gold));color:#5e0b18}
+.btn-outline{background:var(--surface);color:var(--text);border:1.5px solid var(--border)}
+.btn-outline:hover{border-color:var(--gold)}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
+.btn-sm{padding:8px 13px;font-size:.82rem;border-radius:10px}
+.btn-danger{background:transparent;color:var(--red);border:1.5px solid var(--red)}
+.icon-btn{width:38px;height:38px;border-radius:11px;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;display:grid;place-items:center;font-size:1rem}
+main{padding:26px 0 90px}
+.hero{margin-bottom:22px}
+.hero h1{font-size:clamp(1.5rem,3.4vw,2.1rem);margin-bottom:8px}
+.hero p{color:var(--muted);max-width:78ch;font-size:.95rem}
+.privacy{margin-top:14px;background:linear-gradient(135deg,rgba(15,123,82,.1),transparent);border:1px solid rgba(15,123,82,.3);border-radius:14px;padding:13px 16px;font-size:.85rem;color:var(--text);display:flex;gap:10px;align-items:flex-start}
+.tabs{display:flex;gap:6px;background:var(--bg-2);padding:6px;border-radius:14px;margin:22px 0 20px;flex-wrap:wrap}
+.tabs button{flex:1 1 150px;padding:11px;border:0;background:transparent;border-radius:10px;font-weight:600;font-size:.9rem;color:var(--muted);cursor:pointer;font-family:inherit;transition:.2s}
+.tabs button.active{background:var(--surface);color:var(--brand-2);box-shadow:var(--shadow-sm)}
+.panel{display:none}
+.panel.active{display:block}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow-sm);margin-bottom:18px}
+.card h3{font-size:1.02rem;margin-bottom:6px}
+.card p.sub{font-size:.86rem;color:var(--muted);margin-bottom:16px}
+.drop{border:2px dashed var(--border);border-radius:16px;padding:34px 20px;text-align:center;cursor:pointer;transition:.2s;background:var(--surface-2)}
+.drop:hover,.drop.over{border-color:var(--gold);background:var(--brand-soft)}
+.drop .big{font-size:1.9rem;margin-bottom:8px}
+.drop b{display:block;font-size:.98rem;margin-bottom:4px}
+.drop span{font-size:.84rem;color:var(--muted)}
+.queue{margin-top:16px;display:grid;gap:8px}
+.qrow{display:flex;gap:12px;align-items:center;font-size:.85rem;background:var(--surface-2);border:1px solid var(--border);border-radius:11px;padding:10px 13px}
+.qrow .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qrow .st{font-size:.76rem;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--bg-2);color:var(--muted);white-space:nowrap}
+.st.ok{background:rgba(15,123,82,.14);color:var(--green)}
+.st.warn{background:rgba(183,121,31,.16);color:var(--amber)}
+.st.err{background:rgba(192,38,60,.14);color:var(--red)}
+.st.run{background:rgba(122,15,30,.1);color:var(--brand-2)}
+.bar{height:5px;background:var(--bg-2);border-radius:4px;overflow:hidden;margin-top:14px;display:none}
+.bar.show{display:block}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--brand-2));transition:width .2s}
+.tablewrap{overflow:auto;border:1px solid var(--border);border-radius:14px;max-height:60vh}
+table{border-collapse:collapse;width:100%;font-size:.85rem;min-width:840px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);vertical-align:middle}
+th{background:var(--bg-2);font-weight:600;font-size:.76rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);position:sticky;top:0;z-index:1}
+td input,td select{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:8px;background:var(--surface-2);color:var(--text);font-family:inherit;font-size:.84rem}
+td.num input{text-align:right}
+tr.dup{background:rgba(183,121,31,.1)}
+tr.dup td:first-child{box-shadow:inset 3px 0 0 var(--amber)}
+.pill{display:inline-block;font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:999px}
+.pill.in{background:rgba(15,123,82,.15);color:var(--green)}
+.pill.out{background:rgba(192,38,60,.14);color:var(--red)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+@media(max-width:760px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:var(--shadow-sm)}
+.stat b{display:block;font-size:1.45rem;font-weight:800;line-height:1.15}
+.stat span{font-size:.76rem;color:var(--muted)}
+.stat.in b{color:var(--green)} .stat.out b{color:var(--red)} .stat.net b{color:var(--brand-2)}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.filters input,.filters select{padding:9px 12px;border:1px solid var(--border);border-radius:11px;background:var(--surface-2);color:var(--text);font-family:inherit;font-size:.86rem}
+.filters input[type=search]{flex:1 1 200px;min-width:160px}
+.empty{text-align:center;padding:44px 20px;color:var(--muted);font-size:.9rem}
+.empty .big{font-size:2rem;margin-bottom:10px}
+.mapgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+.mapgrid label{display:block;font-size:.78rem;font-weight:600;margin-bottom:5px}
+.mapgrid select{width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:10px;background:var(--surface-2);color:var(--text);font-family:inherit;font-size:.85rem}
+.note{font-size:.79rem;color:var(--muted);margin-top:12px;display:flex;gap:8px;align-items:flex-start}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);z-index:200;background:var(--text);color:var(--bg);padding:12px 20px;border-radius:12px;font-size:.88rem;font-weight:500;box-shadow:var(--shadow);transition:transform .3s cubic-bezier(.2,.9,.3,1.2);max-width:90vw;text-align:center}
+.toast.show{transform:translate(-50%,0)}
+.row-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.howto{font-size:.88rem;color:var(--muted)}
+.howto ol{margin:10px 0 0 20px;display:grid;gap:7px}
+.howto code{background:var(--bg-2);padding:1px 6px;border-radius:6px;font-size:.85em}
+.badge{font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--bg-2);color:var(--muted);margin-left:6px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <span class="logo">₹</span>
+    <span class="brand"><b>EBCA Receipt Desk</b><small>Vendor advance tracker — internal tool</small></span>
+    <span class="spacer"></span>
+    <button class="icon-btn" id="themeBtn" aria-label="Switch theme"></button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Turn receipts into a clean ledger</h1>
+    <p>Drop in the payment receipts that arrive on WhatsApp — screenshots, PDFs, photos — or a bank statement. The desk reads them, puts the details into an editable table, and exports a spreadsheet. No more typing entries one by one.</p>
+    <div class="privacy">
+      <span>🔒</span>
+      <span><b>Everything happens on this device.</b> Files are read in your browser and the ledger is stored only in this browser's local storage. Nothing is uploaded to any server. Use <b>Export</b> to keep a permanent copy.</span>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="active" data-tab="receipts">📷 Receipts</button>
+    <button data-tab="statement">🏦 Bank statement</button>
+    <button data-tab="ledger">📒 Ledger <span class="badge" id="ledgerCount">0</span></button>
+  </div>
+
+  <!-- ============ RECEIPTS ============ -->
+  <section class="panel active" id="panel-receipts">
+    <div class="card">
+      <h3>Step 1 — Add the receipts</h3>
+      <p class="sub">Drag in as many as you like. Images are read with on-device OCR; PDFs have their text read directly. You can also just add rows by hand at the bottom of this list.</p>
+      <div class="drop" id="drop">
+        <div class="big">📥</div>
+        <b>Drop receipt files here</b>
+        <span>or click to choose — JPG, PNG, WEBP, HEIC, PDF</span>
+      </div>
+      <input type="file" id="fileInput" multiple accept="image/*,application/pdf" hidden>
+      <div class="bar" id="bar"><i id="barFill"></i></div>
+      <div class="queue" id="queue"></div>
+    </div>
+
+    <div class="card">
+      <h3>Step 2 — Check and correct <span class="badge" id="reviewCount">0 rows</span></h3>
+      <p class="sub">OCR is not perfect, so give every row a quick glance. Amber rows look like a possible duplicate. Edit anything that's off, then add them to the ledger.</p>
+      <div class="tablewrap">
+        <table id="reviewTable">
+          <thead><tr>
+            <th style="width:120px">Date</th>
+            <th style="width:120px">Direction</th>
+            <th style="width:110px">Amount ₹</th>
+            <th>Party / vendor</th>
+            <th style="width:160px">Reference (UTR)</th>
+            <th style="width:70px">Mode</th>
+            <th style="width:44px"></th>
+          </tr></thead>
+          <tbody id="reviewBody"></tbody>
+        </table>
+      </div>
+      <div id="reviewEmpty" class="empty"><div class="big">🧾</div>No receipts read yet — drop some files above, or add a row by hand.</div>
+      <div class="row-actions">
+        <button class="btn btn-brand" id="commitBtn">➕ Add all to ledger</button>
+        <button class="btn btn-outline" id="manualBtn">✏️ Add a row by hand</button>
+        <button class="btn btn-ghost" id="clearReviewBtn">Clear this list</button>
+      </div>
+      <p class="note"><span>💡</span><span>Tip: if a receipt is a photo taken at an angle or in poor light, OCR will struggle — type those few in by hand. Straight screenshots read very well.</span></p>
+    </div>
+  </section>
+
+  <!-- ============ STATEMENT ============ -->
+  <section class="panel" id="panel-statement">
+    <div class="card">
+      <h3>Import a bank statement</h3>
+      <p class="sub">This is usually the quickest route of all: if the advances land in EBCA's account, the statement already lists every credit with its date, amount and reference. Download it as CSV or Excel and drop it here.</p>
+      <div class="drop" id="drop2">
+        <div class="big">🏦</div>
+        <b>Drop the statement here</b>
+        <span>or click to choose — CSV, XLSX, XLS, PDF</span>
+      </div>
+      <input type="file" id="fileInput2" accept=".csv,.xlsx,.xls,.pdf,text/csv,application/pdf" hidden>
+    </div>
+
+    <div class="card" id="mapCard" style="display:none">
+      <h3>Match the columns</h3>
+      <p class="sub">We've guessed these from the headers — change any that look wrong.</p>
+      <div class="mapgrid" id="mapGrid"></div>
+      <div class="row-actions">
+        <button class="btn btn-brand" id="importBtn">➕ Import into the review list</button>
+        <button class="btn btn-ghost" id="cancelMapBtn">Cancel</button>
+      </div>
+      <p class="note"><span>ℹ️</span><span>If the statement has separate Debit and Credit columns, pick both — each line becomes either money received or money paid.</span></p>
+    </div>
+
+    <div class="card" id="stmtPreviewCard" style="display:none">
+      <h3>Preview <span class="badge" id="stmtCount">0</span></h3>
+      <div class="tablewrap" style="max-height:40vh"><table id="stmtTable"><thead id="stmtHead"></thead><tbody id="stmtBody"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ============ LEDGER ============ -->
+  <section class="panel" id="panel-ledger">
+    <div class="stats">
+      <div class="stat in"><b id="stIn">₹0</b><span>Received</span></div>
+      <div class="stat out"><b id="stOut">₹0</b><span>Paid out</span></div>
+      <div class="stat net"><b id="stNet">₹0</b><span>Net</span></div>
+      <div class="stat"><b id="stCount">0</b><span>Entries</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Ledger</h3>
+      <p class="sub">Everything you've added, saved in this browser. Export whenever you want a permanent spreadsheet.</p>
+      <div class="filters">
+        <input type="search" id="search" placeholder="Search party, reference or notes…">
+        <select id="dirFilter"><option value="">All directions</option><option value="in">Received only</option><option value="out">Paid out only</option></select>
+        <select id="monthFilter"><option value="">All months</option></select>
+        <button class="btn btn-outline btn-sm" id="exportXlsx">⬇️ Export Excel</button>
+        <button class="btn btn-outline btn-sm" id="exportCsv">⬇️ Export CSV</button>
+        <button class="btn btn-danger btn-sm" id="clearLedger">Clear ledger</button>
+      </div>
+      <div class="tablewrap">
+        <table id="ledgerTable">
+          <thead><tr>
+            <th style="width:110px">Date</th><th style="width:110px">Direction</th><th style="width:110px">Amount ₹</th>
+            <th>Party / vendor</th><th style="width:150px">Reference</th><th style="width:80px">Mode</th>
+            <th style="width:90px">Source</th><th style="width:44px"></th>
+          </tr></thead>
+          <tbody id="ledgerBody"></tbody>
+        </table>
+      </div>
+      <div id="ledgerEmpty" class="empty"><div class="big">📒</div>Nothing in the ledger yet.</div>
+    </div>
+
+    <div class="card">
+      <h3>How this saves time</h3>
+      <div class="howto">
+        <ol>
+          <li>Save the receipts out of WhatsApp into a folder (you're already looking at them).</li>
+          <li>Drop the whole folder here at once — no need to do them one by one.</li>
+          <li>Scan the table for anything odd, fix it, then <b>Add all to ledger</b>.</li>
+          <li>At the end of the day, <b>Export Excel</b> and file it.</li>
+        </ol>
+        <p style="margin-top:12px">For the money that lands in the bank, skip all of that — import the statement and let the bank's own record do the work.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var $ = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+  var LS_KEY = "ebca-ledger-v1";
+
+  /* ---------------- toast ---------------- */
+  var toastEl = $("#toast"), tt;
+  function toast(m){ toastEl.textContent = m; toastEl.classList.add("show"); clearTimeout(tt); tt = setTimeout(function(){ toastEl.classList.remove("show"); }, 3000); }
+
+  /* ---------------- theme ---------------- */
+  var SUN='<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  var MOON='<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+  function applyTheme(t){
+    document.documentElement.setAttribute("data-theme", t);
+    $("#themeBtn").innerHTML = t === "dark" ? SUN : MOON;
+    try{ localStorage.setItem("ebca-desk-theme", t); }catch(e){}
+  }
+  var th = null; try{ th = localStorage.getItem("ebca-desk-theme"); }catch(e){}
+  if(!th) th = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+  applyTheme(th);
+  $("#themeBtn").addEventListener("click", function(){
+    applyTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
+  });
+
+  /* ---------------- tabs ---------------- */
+  $$(".tabs button").forEach(function(b){
+    b.addEventListener("click", function(){
+      $$(".tabs button").forEach(function(x){ x.classList.remove("active"); });
+      b.classList.add("active");
+      $$(".panel").forEach(function(p){ p.classList.remove("active"); });
+      $("#panel-" + b.getAttribute("data-tab")).classList.add("active");
+    });
+  });
+
+  /* =====================================================================
+     RECEIPT PARSER  — pure function, unit-tested separately
+     ===================================================================== */
+  var MONTHS = {jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
+  function pad(n){ return (n<10?"0":"") + n; }
+
+  function parseAmount(flat){
+    var kw = /(?:amount|paid|received|total|debited|credited|txn\s*amount|transfer)\D{0,24}?(?:₹|rs\.?|inr)\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)/i.exec(flat);
+    if(kw) return parseFloat(kw[1].replace(/,/g,""));
+    var re = /(?:₹|rs\.?|inr)\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)/gi, m, all = [];
+    while((m = re.exec(flat))){ all.push(parseFloat(m[1].replace(/,/g,""))); }
+    if(all.length) return Math.max.apply(null, all);
+    var bare = /\b([0-9][0-9,]{3,}(?:\.[0-9]{2}))\b/.exec(flat);
+    if(bare) return parseFloat(bare[1].replace(/,/g,""));
+    return null;
+  }
+
+  function parseDate(flat){
+    var m = /\b([0-3]?\d)[\/\-.](\d{1,2})[\/\-.](\d{2,4})\b/.exec(flat);
+    if(m){
+      var d = parseInt(m[1],10), mo = parseInt(m[2],10), y = parseInt(m[3],10);
+      if(y < 100) y += 2000;
+      if(mo > 12 && d <= 12){ var t = d; d = mo; mo = t; } // dd/mm vs mm/dd
+      if(mo >= 1 && mo <= 12 && d >= 1 && d <= 31) return y + "-" + pad(mo) + "-" + pad(d);
+    }
+    m = /\b([0-3]?\d)\s+(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?,?\s*(\d{4})\b/i.exec(flat);
+    if(m) return m[3] + "-" + pad(MONTHS[m[2].toLowerCase().slice(0,3)]) + "-" + pad(parseInt(m[1],10));
+    m = /\b(\d{4})-(\d{2})-(\d{2})\b/.exec(flat);
+    if(m) return m[1] + "-" + m[2] + "-" + m[3];
+    m = /\b(\d{1,2})\s+(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\b/i.exec(flat);
+    if(m) return new Date().getFullYear() + "-" + pad(MONTHS[m[2].toLowerCase().slice(0,3)]) + "-" + pad(parseInt(m[1],10));
+    return "";
+  }
+
+  function parseRef(flat){
+    var m = /(?:utr|ref(?:erence)?(?:\s*(?:no|number|id))?|transaction\s*id|txn\s*id|upi\s*(?:ref(?:erence)?|id)|rrn|order\s*id)\s*[:\-]?\s*([A-Za-z0-9]{6,24})/i.exec(flat);
+    if(m) return m[1];
+    m = /\b(\d{12})\b/.exec(flat);
+    if(m) return m[1];
+    m = /\b([A-Z]{2,4}[0-9]{8,16})\b/.exec(flat);
+    if(m) return m[1];
+    return "";
+  }
+
+  function parseParty(flat){
+    var pats = [
+      /(?:paid to|payment to|transferred to|sent to)\s*[:\-]?\s*([A-Za-z][A-Za-z0-9 .&'\-]{2,44})/i,
+      /(?:received from|credited from|from account of)\s*[:\-]?\s*([A-Za-z][A-Za-z0-9 .&'\-]{2,44})/i,
+      /(?:beneficiary(?:\s*name)?|payee|vendor)\s*[:\-]?\s*([A-Za-z][A-Za-z0-9 .&'\-]{2,44})/i,
+      /(?:^|\n)\s*(?:to|from)\s*[:\-]\s*([A-Za-z][A-Za-z0-9 .&'\-]{2,44})/i,
+      /(?:name)\s*[:\-]?\s*([A-Za-z][A-Za-z0-9 .&'\-]{2,44})/i
+    ];
+    for(var i=0;i<pats.length;i++){
+      var m = pats[i].exec(flat);
+      if(m){
+        var v = m[1].replace(/\s{2,}/g," ").trim();
+        v = v.replace(/\s+(UPI|NEFT|IMPS|RTGS|Ref|UTR|Txn|Transaction|Date|Amount|Rs|INR)\b.*$/i,"").trim();
+        if(v.length >= 2) return v;
+      }
+    }
+    return "";
+  }
+
+  function parseDirection(flat){
+    var out = /(?:paid to|you paid|debited|sent to|payment to|transfer(?:red)? to|withdrawn|dr\b|to\s+upi)/i.test(flat);
+    var inc = /(?:received from|you received|credited|money received|deposited|cr\b|from\s+upi)/i.test(flat);
+    if(out && !inc) return "out";
+    if(inc && !out) return "in";
+    if(out && inc) return /(received from|credited)/i.test(flat) ? "in" : "out";
+    return "";
+  }
+
+  function parseMode(flat){
+    var m = /\b(upi|neft|imps|rtgs|cash|cheque|check|card|netbanking|net banking)\b/i.exec(flat);
+    return m ? m[1].toUpperCase().replace("NET BANKING","NETBANKING") : "";
+  }
+
+  function parseReceipt(text){
+    var flat = String(text || "").replace(/\u00a0/g," ").replace(/\r/g,"").replace(/[ \t]+/g," ");
+    var flatOne = flat.replace(/\s+/g," ");
+    var r = { date:"", direction:"", amount:null, party:"", reference:"", mode:"", confidence:0 };
+    r.amount = parseAmount(flatOne);
+    r.date = parseDate(flatOne);
+    r.reference = parseRef(flatOne);
+    r.party = parseParty(flatOne) || parseParty(flat);
+    r.direction = parseDirection(flatOne);
+    r.mode = parseMode(flatOne);
+    var got = 0;
+    if(r.amount != null) got++;
+    if(r.date) got++;
+    if(r.reference) got++;
+    if(r.party) got++;
+    if(r.direction) got++;
+    r.confidence = got / 5;
+    return r;
+  }
+  window.__ebcaParse = parseReceipt; // exposed for tests
+
+  /* =====================================================================
+     LEDGER
+     ===================================================================== */
+  var ledger = [];
+  function load(){
+    try{ var raw = localStorage.getItem(LS_KEY); ledger = raw ? JSON.parse(raw) : []; }catch(e){ ledger = []; }
+    if(!Array.isArray(ledger)) ledger = [];
+  }
+  function save(){
+    try{ localStorage.setItem(LS_KEY, JSON.stringify(ledger)); }catch(e){ toast("Could not save locally — storage may be full."); }
+  }
+  function uid(){ return Math.random().toString(36).slice(2,10); }
+  function money(n){
+    n = Number(n) || 0;
+    return "₹" + n.toLocaleString("en-IN", {maximumFractionDigits:2});
+  }
+  function fmtDate(d){
+    if(!d) return "";
+    var p = d.split("-");
+    if(p.length !== 3) return d;
+    return p[2] + "/" + p[1] + "/" + p[0];
+  }
+  function isDup(row){
+    if(!row.reference) return false;
+    var ref = String(row.reference).trim().toLowerCase();
+    return ledger.some(function(r){
+      return r.reference && String(r.reference).trim().toLowerCase() === ref;
+    });
+  }
+
+  function renderLedger(){
+    var q = ($("#search").value || "").toLowerCase();
+    var dir = $("#dirFilter").value;
+    var mon = $("#monthFilter").value;
+    var rows = ledger.filter(function(r){
+      if(dir && r.direction !== dir) return false;
+      if(mon && String(r.date||"").slice(0,7) !== mon) return false;
+      if(q){
+        var hay = (r.party + " " + r.reference + " " + (r.notes||"") + " " + (r.mode||"")).toLowerCase();
+        if(hay.indexOf(q) === -1) return false;
+      }
+      return true;
+    });
+
+    // month filter options
+    var months = {};
+    ledger.forEach(function(r){ if(r.date) months[String(r.date).slice(0,7)] = 1; });
+    var mf = $("#monthFilter"), cur = mf.value;
+    mf.innerHTML = '<option value="">All months</option>' + Object.keys(months).sort().reverse().map(function(m){
+      var lbl = m.split("-"); return '<option value="'+m+'">'+lbl[1]+"/"+lbl[0]+'</option>';
+    }).join("");
+    mf.value = cur;
+
+    var body = $("#ledgerBody");
+    body.innerHTML = rows.map(function(r){
+      return '<tr data-id="'+r.id+'">' +
+        '<td>'+fmtDate(r.date)+'</td>' +
+        '<td><span class="pill '+r.direction+'">'+(r.direction==="in"?"Received":"Paid out")+'</span></td>' +
+        '<td class="num">'+money(r.amount)+'</td>' +
+        '<td>'+esc(r.party)+'</td>' +
+        '<td>'+esc(r.reference)+'</td>' +
+        '<td>'+esc(r.mode)+'</td>' +
+        '<td>'+esc(r.source||"")+'</td>' +
+        '<td><button class="btn btn-ghost btn-sm" data-del="'+r.id+'" title="Delete">✕</button></td>' +
+      '</tr>';
+    }).join("");
+    $("#ledgerEmpty").style.display = rows.length ? "none" : "block";
+    $("#ledgerTable").style.display = rows.length ? "" : "none";
+
+    var tin = 0, tout = 0;
+    ledger.forEach(function(r){ if(r.direction === "in") tin += Number(r.amount)||0; else if(r.direction === "out") tout += Number(r.amount)||0; });
+    $("#stIn").textContent = money(tin);
+    $("#stOut").textContent = money(tout);
+    $("#stNet").textContent = money(tin - tout);
+    $("#stCount").textContent = ledger.length;
+    $("#ledgerCount").textContent = ledger.length;
+  }
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]; }); }
+
+  $("#ledgerBody").addEventListener("click", function(e){
+    var b = e.target.closest("[data-del]");
+    if(!b) return;
+    var id = b.getAttribute("data-del");
+    ledger = ledger.filter(function(r){ return r.id !== id; });
+    save(); renderLedger(); toast("Entry removed.");
+  });
+  $("#search").addEventListener("input", renderLedger);
+  $("#dirFilter").addEventListener("change", renderLedger);
+  $("#monthFilter").addEventListener("change", renderLedger);
+
+  /* ---------------- export ---------------- */
+  function exportRows(){
+    return ledger.map(function(r){
+      return { "Date": fmtDate(r.date), "Direction": r.direction === "in" ? "Received" : "Paid out",
+        "Amount (INR)": Number(r.amount)||0, "Party / Vendor": r.party || "", "Reference / UTR": r.reference || "",
+        "Mode": r.mode || "", "Source": r.source || "", "Notes": r.notes || "" };
+    });
+  }
+  function download(blob, name){
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1500);
+  }
+  $("#exportCsv").addEventListener("click", function(){
+    if(!ledger.length) return toast("Nothing to export yet.");
+    var rows = exportRows();
+    var cols = Object.keys(rows[0]);
+    var csv = cols.join(",") + "\n" + rows.map(function(r){
+      return cols.map(function(c){ return '"' + String(r[c]).replace(/"/g,'""') + '"'; }).join(",");
+    }).join("\n");
+    download(new Blob([csv], {type:"text/csv"}), "ebca-ledger.csv");
+    toast("CSV downloaded.");
+  });
+  $("#exportXlsx").addEventListener("click", function(){
+    if(!ledger.length) return toast("Nothing to export yet.");
+    if(typeof XLSX === "undefined") return toast("Excel library didn't load — use Export CSV instead.");
+    var rows = exportRows();
+    var ws = XLSX.utils.json_to_sheet(rows);
+    ws["!cols"] = [{wch:12},{wch:12},{wch:14},{wch:28},{wch:20},{wch:10},{wch:10},{wch:24}];
+    var wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Ledger");
+    XLSX.writeFile(wb, "ebca-ledger.xlsx");
+    toast("Excel downloaded.");
+  });
+  $("#clearLedger").addEventListener("click", function(){
+    if(!ledger.length) return;
+    if(!confirm("Delete all " + ledger.length + " ledger entries? This cannot be undone. Export first if you need a copy.")) return;
+    ledger = []; save(); renderLedger(); toast("Ledger cleared.");
+  });
+
+  /* =====================================================================
+     REVIEW LIST
+     ===================================================================== */
+  var review = [];
+  function renderReview(){
+    var body = $("#reviewBody");
+    body.innerHTML = review.map(function(r, i){
+      var dup = isDup(r);
+      return '<tr data-i="'+i+'" class="'+(dup?"dup":"")+'">' +
+        '<td><input type="date" data-f="date" value="'+esc(r.date)+'"></td>' +
+        '<td><select data-f="direction"><option value="in"'+(r.direction==="in"?" selected":"")+'>Received</option>'+
+            '<option value="out"'+(r.direction==="out"?" selected":"")+'>Paid out</option></select></td>' +
+        '<td class="num"><input type="number" step="0.01" data-f="amount" value="'+(r.amount==null?"":r.amount)+'"></td>' +
+        '<td><input type="text" data-f="party" value="'+esc(r.party)+'" placeholder="Vendor name"></td>' +
+        '<td><input type="text" data-f="reference" value="'+esc(r.reference)+'"></td>' +
+        '<td><input type="text" data-f="mode" value="'+esc(r.mode)+'"></td>' +
+        '<td><button class="btn btn-ghost btn-sm" data-rm="'+i+'">✕</button></td>' +
+      '</tr>';
+    }).join("");
+    $("#reviewEmpty").style.display = review.length ? "none" : "block";
+    $("#reviewTable").style.display = review.length ? "" : "none";
+    $("#reviewCount").textContent = review.length + (review.length === 1 ? " row" : " rows");
+  }
+  $("#reviewBody").addEventListener("input", function(e){
+    var el = e.target; if(!el.dataset || !el.dataset.f) return;
+    var i = parseInt(el.closest("tr").getAttribute("data-i"),10);
+    var f = el.dataset.f;
+    review[i][f] = (f === "amount") ? (el.value === "" ? null : parseFloat(el.value)) : el.value;
+    if(f === "reference") renderReview();
+  });
+  $("#reviewBody").addEventListener("change", function(e){
+    var el = e.target;
+    if(el.tagName === "SELECT" && el.dataset.f === "direction"){
+      var i = parseInt(el.closest("tr").getAttribute("data-i"),10);
+      review[i].direction = el.value;
+    }
+  });
+  $("#reviewBody").addEventListener("click", function(e){
+    var b = e.target.closest("[data-rm]"); if(!b) return;
+    review.splice(parseInt(b.getAttribute("data-rm"),10), 1);
+    renderReview();
+  });
+
+  $("#commitBtn").addEventListener("click", function(){
+    if(!review.length) return toast("Nothing to add.");
+    var added = 0, skipped = 0, dups = 0;
+    review.forEach(function(r){
+      if(r.amount == null || isNaN(r.amount)) { skipped++; return; }
+      if(isDup(r)) dups++;
+      ledger.push({
+        id: uid(), date: r.date || "", direction: r.direction || "in",
+        amount: Number(r.amount) || 0, party: r.party || "", reference: r.reference || "",
+        mode: r.mode || "", source: r.source || "receipt", notes: ""
+      });
+      added++;
+    });
+    save(); renderLedger();
+    review = []; renderReview();
+    var msg = added + " added to the ledger.";
+    if(skipped) msg += " " + skipped + " skipped (no amount).";
+    if(dups) msg += " " + dups + " looked like duplicates — check the ledger.";
+    toast(msg);
+    $$(".tabs button")[2].click();
+  });
+  $("#clearReviewBtn").addEventListener("click", function(){ review = []; renderReview(); });
+  $("#manualBtn").addEventListener("click", function(){
+    review.push({ date: new Date().toISOString().slice(0,10), direction:"in", amount:null, party:"", reference:"", mode:"", source:"manual" });
+    renderReview();
+  });
+
+  /* =====================================================================
+     FILE READING
+     ===================================================================== */
+  if(window.pdfjsLib){
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
+  }
+
+  var tWorker = null;
+  async function getTesseract(){
+    if(tWorker) return tWorker;
+    if(typeof Tesseract === "undefined") throw new Error("OCR library not loaded");
+    tWorker = await Tesseract.createWorker("eng");
+    return tWorker;
+  }
+  async function ocrImage(file){
+    var w = await getTesseract();
+    var res = await w.recognize(file);
+    return (res && res.data && res.data.text) ? res.data.text : "";
+  }
+  async function pdfText(file){
+    if(!window.pdfjsLib) throw new Error("PDF library not loaded");
+    var buf = await file.arrayBuffer();
+    var pdf = await window.pdfjsLib.getDocument({data: buf}).promise;
+    var out = [];
+    for(var i = 1; i <= pdf.numPages; i++){
+      var page = await pdf.getPage(i);
+      var tc = await page.getTextContent();
+      out.push(tc.items.map(function(it){ return it.str; }).join(" "));
+    }
+    return out.join("\n");
+  }
+
+  function setBar(p){ var bar = $("#bar"); bar.classList.add("show"); $("#barFill").style.width = Math.round(p*100) + "%"; }
+  function hideBar(){ setTimeout(function(){ $("#bar").classList.remove("show"); $("#barFill").style.width = "0"; }, 600); }
+
+  function queueRow(name){
+    var d = document.createElement("div");
+    d.className = "qrow";
+    d.innerHTML = '<span class="nm">'+esc(name)+'</span><span class="st">waiting</span>';
+    $("#queue").appendChild(d);
+    return d.querySelector(".st");
+  }
+
+  async function handleFiles(files){
+    files = Array.prototype.slice.call(files || []);
+    if(!files.length) return;
+    var sts = files.map(function(f){ return queueRow(f.name); });
+    var done = 0;
+    for(var i = 0; i < files.length; i++){
+      var f = files[i], st = sts[i];
+      st.className = "st run"; st.textContent = "reading…";
+      try{
+        var text = "";
+        if(f.type === "application/pdf" || /\.pdf$/i.test(f.name)){
+          text = await pdfText(f);
+        } else {
+          text = await ocrImage(f);
+        }
+        var parsed = parseReceipt(text);
+        parsed.source = "receipt";
+        if(parsed.amount == null && !parsed.reference && !parsed.party){
+          st.className = "st err"; st.textContent = "nothing found";
+          parsed.party = f.name.replace(/\.[a-z0-9]+$/i,"").replace(/[_\-]+/g," ").slice(0,44);
+        } else {
+          st.className = "st ok";
+          st.textContent = parsed.amount != null ? money(parsed.amount) : "read";
+        }
+        review.push(parsed);
+      }catch(err){
+        st.className = "st err"; st.textContent = "failed";
+        review.push({ date:"", direction:"", amount:null, party:f.name.replace(/\.[a-z0-9]+$/i,""), reference:"", mode:"", source:"receipt" });
+      }
+      done++;
+      setBar(done / files.length);
+      renderReview();
+    }
+    hideBar();
+    toast("Read " + files.length + " file" + (files.length>1?"s":"") + " — check the table below.");
+  }
+
+  function wireDrop(dropEl, inputEl, handler){
+    dropEl.addEventListener("click", function(){ inputEl.click(); });
+    inputEl.addEventListener("change", function(){ handler(inputEl.files); inputEl.value = ""; });
+    ["dragenter","dragover"].forEach(function(ev){
+      dropEl.addEventListener(ev, function(e){ e.preventDefault(); dropEl.classList.add("over"); });
+    });
+    ["dragleave","drop"].forEach(function(ev){
+      dropEl.addEventListener(ev, function(e){ e.preventDefault(); dropEl.classList.remove("over"); });
+    });
+    dropEl.addEventListener("drop", function(e){
+      if(e.dataTransfer && e.dataTransfer.files) handler(e.dataTransfer.files);
+    });
+  }
+  wireDrop($("#drop"), $("#fileInput"), handleFiles);
+  wireDrop($("#drop2"), $("#fileInput2"), handleStatement);
+
+  /* =====================================================================
+     BANK STATEMENT
+     ===================================================================== */
+  var stmtRows = [], stmtCols = [], mapEls = {};
+
+  function csvToRows(text){
+    var rows = [], row = [], cur = "", q = false;
+    for(var i = 0; i < text.length; i++){
+      var c = text[i];
+      if(q){
+        if(c === '"'){ if(text[i+1] === '"'){ cur += '"'; i++; } else q = false; }
+        else cur += c;
+      } else {
+        if(c === '"') q = true;
+        else if(c === ","){ row.push(cur); cur = ""; }
+        else if(c === "\n"){ row.push(cur); rows.push(row); row = []; cur = ""; }
+        else if(c === "\r"){ /* skip */ }
+        else cur += c;
+      }
+    }
+    if(cur !== "" || row.length){ row.push(cur); rows.push(row); }
+    return rows.filter(function(r){ return r.some(function(c){ return String(c).trim() !== ""; }); });
+  }
+
+  async function readStatement(file){
+    var name = (file.name || "").toLowerCase();
+    if(name.endsWith(".csv") || file.type === "text/csv"){
+      return csvToRows(await file.text());
+    }
+    if(name.endsWith(".xlsx") || name.endsWith(".xls")){
+      if(typeof XLSX === "undefined") throw new Error("Excel library not loaded");
+      var wb = XLSX.read(await file.arrayBuffer(), {type:"array"});
+      var ws = wb.Sheets[wb.SheetNames[0]];
+      return XLSX.utils.sheet_to_json(ws, {header:1, blankrows:false, raw:false});
+    }
+    if(name.endsWith(".pdf")){
+      var text = await pdfText(file);
+      // naive: pull lines that contain a date and an amount
+      var out = [["Date","Description","Amount"]];
+      text.split(/\n+/).forEach(function(line){
+        var d = parseDate(line), a = parseAmount(line);
+        if(d && a != null) out.push([d, line.replace(/\s+/g," ").slice(0,90), String(a)]);
+      });
+      return out;
+    }
+    throw new Error("Unsupported file");
+  }
+
+  function detectCols(headers){
+    function find(re){ for(var i=0;i<headers.length;i++){ if(re.test(String(headers[i]))) return i; } return -1; }
+    return {
+      date: find(/date|txn\s*date|value\s*date|posting/i),
+      amount: find(/^amount$|amt|transaction\s*amount|amount\s*\(/i),
+      debit: find(/debit|withdrawal|paid\s*out|dr\b/i),
+      credit: find(/credit|deposit|paid\s*in|cr\b/i),
+      desc: find(/description|narration|particulars|details|remarks|party|name|payee/i),
+      ref: find(/ref|utr|cheque|chq|transaction\s*id|txn\s*id/i)
+    };
+  }
+
+  async function handleStatement(files){
+    var file = (files && files[0]);
+    if(!file) return;
+    toast("Reading " + file.name + "…");
+    try{
+      var rows = await readStatement(file);
+      if(!rows.length) return toast("No rows found in that file.");
+      // header row = first row with >=2 non-empty cells and at least one non-numeric
+      var hIdx = 0;
+      for(var i = 0; i < Math.min(rows.length, 8); i++){
+        var nonEmpty = rows[i].filter(function(c){ return String(c).trim() !== ""; }).length;
+        var numeric = rows[i].filter(function(c){ return /^[\d,.\-]+$/.test(String(c).trim()) && String(c).trim() !== ""; }).length;
+        if(nonEmpty >= 2 && numeric < nonEmpty){ hIdx = i; break; }
+      }
+      stmtCols = rows[hIdx].map(function(c, i){ return String(c).trim() || ("Column " + (i+1)); });
+      stmtRows = rows.slice(hIdx+1).filter(function(r){ return r.some(function(c){ return String(c).trim() !== ""; }); });
+      if(!stmtRows.length) return toast("Only a header row found — nothing to import.");
+      buildMapper(detectCols(stmtCols));
+      $("#mapCard").style.display = "block";
+      $("#mapCard").scrollIntoView({behavior:"smooth", block:"nearest"});
+    }catch(err){
+      toast("Could not read that file: " + (err.message || err));
+    }
+  }
+
+  function buildMapper(detected){
+    var fields = [
+      ["date","Date", detected.date],
+      ["amount","Amount (single column)", detected.amount],
+      ["debit","Debit / money out", detected.debit],
+      ["credit","Credit / money in", detected.credit],
+      ["desc","Description / party", detected.desc],
+      ["ref","Reference / UTR", detected.ref]
+    ];
+    mapEls = {};
+    $("#mapGrid").innerHTML = fields.map(function(f){
+      var opts = '<option value="-1">— none —</option>' + stmtCols.map(function(c,i){
+        return '<option value="'+i+'"'+(i===f[2]?" selected":"")+'>'+esc(c)+'</option>';
+      }).join("");
+      return '<div><label>'+f[1]+'</label><select data-map="'+f[0]+'">'+opts+'</select></div>';
+    }).join("");
+    $$("#mapGrid select").forEach(function(s){ mapEls[s.getAttribute("data-map")] = s; });
+    previewStatement();
+    $$("#mapGrid select").forEach(function(s){ s.addEventListener("change", previewStatement); });
+  }
+
+  function toNum(v){
+    if(v == null) return null;
+    var s = String(v).replace(/[₹,\s]/g,"").replace(/[()]/g,"");
+    if(s === "" || isNaN(parseFloat(s))) return null;
+    return parseFloat(s);
+  }
+
+  function mappedRows(){
+    function val(row, key){
+      var el = mapEls[key]; if(!el) return "";
+      var i = parseInt(el.value,10); if(i < 0) return "";
+      return row[i] == null ? "" : String(row[i]).trim();
+    }
+    return stmtRows.map(function(row){
+      var amt = toNum(val(row,"amount"));
+      var deb = toNum(val(row,"debit"));
+      var cre = toNum(val(row,"credit"));
+      var direction = "in", amount = null;
+      if(amt != null && amt !== 0){ amount = Math.abs(amt); direction = amt < 0 ? "out" : "in"; }
+      else if(cre != null && cre !== 0){ amount = Math.abs(cre); direction = "in"; }
+      else if(deb != null && deb !== 0){ amount = Math.abs(deb); direction = "out"; }
+      var desc = val(row,"desc");
+      return {
+        date: parseDate(val(row,"date")),
+        direction: direction,
+        amount: amount,
+        party: desc.slice(0,60),
+        reference: val(row,"ref"),
+        mode: "",
+        source: "statement"
+      };
+    }).filter(function(r){ return r.amount != null && r.amount > 0; });
+  }
+
+  function previewStatement(){
+    var rows = mappedRows();
+    $("#stmtCount").textContent = rows.length + " rows";
+    $("#stmtHead").innerHTML = "<tr><th>Date</th><th>Direction</th><th>Amount</th><th>Description / party</th><th>Reference</th></tr>";
+    $("#stmtBody").innerHTML = rows.slice(0, 60).map(function(r){
+      return "<tr><td>"+fmtDate(r.date)+"</td><td><span class='pill "+r.direction+"'>"+(r.direction==="in"?"Received":"Paid out")+"</span></td>"+
+        "<td class='num'>"+money(r.amount)+"</td><td>"+esc(r.party)+"</td><td>"+esc(r.reference)+"</td></tr>";
+    }).join("");
+    $("#stmtPreviewCard").style.display = rows.length ? "block" : "none";
+  }
+
+  $("#importBtn").addEventListener("click", function(){
+    var rows = mappedRows();
+    if(!rows.length) return toast("Nothing to import — check the column mapping.");
+    review = review.concat(rows);
+    renderReview();
+    $("#mapCard").style.display = "none";
+    $("#stmtPreviewCard").style.display = "none";
+    stmtRows = []; stmtCols = [];
+    $$(".tabs button")[0].click();
+    toast(rows.length + " rows loaded — review them, then add to the ledger.");
+  });
+  $("#cancelMapBtn").addEventListener("click", function(){
+    $("#mapCard").style.display = "none";
+    $("#stmtPreviewCard").style.display = "none";
+    stmtRows = []; stmtCols = [];
+  });
+
+  /* ---------------- init ---------------- */
+  load();
+  renderLedger();
+  renderReview();
+})();
+</script>
+</body>
+</html>
