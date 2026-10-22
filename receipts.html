@@ -8,6 +8,9 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#7a0f1e">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%237a0f1e'/><text y='72' x='50' text-anchor='middle' font-size='58' fill='%23f0c24b' font-family='serif'>&#8377;</text></svg>">
+<link rel="manifest" href="desk-manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Receipt Desk">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Tiro+Bangla&display=swap" rel="stylesheet">
@@ -153,6 +156,7 @@ tr.dup td:first-child{box-shadow:inset 3px 0 0 var(--amber)}
         <span>or click to choose — JPG, PNG, WEBP, HEIC, PDF</span>
       </div>
       <input type="file" id="fileInput" multiple accept="image/*,application/pdf" hidden>
+      <p class="note" id="shareHint" style="display:none"><span>📲</span><span><b>Faster on a phone:</b> add this page to your home screen once. From then on you can share a receipt <b>straight from WhatsApp</b> into the desk — long-press the receipt, tap Share, and choose Receipt Desk. No saving files first.</span></p>
       <div class="bar" id="bar"><i id="barFill"></i></div>
       <div class="queue" id="queue"></div>
     </div>
@@ -864,6 +868,51 @@ tr.dup td:first-child{box-shadow:inset 3px 0 0 var(--amber)}
     $("#mapCard").style.display = "none";
     $("#stmtPreviewCard").style.display = "none";
     stmtRows = []; stmtCols = [];
+  });
+
+  /* =====================================================================
+     PWA + WhatsApp share target
+     ===================================================================== */
+  var SHARE_CACHE = "ebca-desk-share";
+
+  async function pullSharedFiles(){
+    if(!("caches" in window)) return [];
+    var params = new URLSearchParams(location.search);
+    if(params.get("share_error") === "1") toast("Something went wrong receiving the shared file — please use the drop area.");
+    if(params.get("shared") !== "1") return [];
+    var out = [];
+    try{
+      var cache = await caches.open(SHARE_CACHE);
+      var keys = await cache.keys();
+      for(var i = 0; i < keys.length; i++){
+        var res = await cache.match(keys[i]);
+        if(!res) continue;
+        var blob = await res.blob();
+        var nm = res.headers.get("X-Filename");
+        nm = nm ? decodeURIComponent(nm) : "receipt";
+        out.push(new File([blob], nm, { type: blob.type || "application/octet-stream" }));
+        await cache.delete(keys[i]);
+      }
+    }catch(e){ /* nothing shared */ }
+    return out;
+  }
+
+  if("serviceWorker" in navigator && window.isSecureContext){
+    window.addEventListener("load", function(){
+      navigator.serviceWorker.register("sw.js").catch(function(){});
+    });
+    // tell volunteers about the share shortcut on touch devices
+    if(window.matchMedia && window.matchMedia("(pointer: coarse)").matches){
+      var sh = $("#shareHint");
+      if(sh) sh.style.display = "flex";
+    }
+  }
+
+  pullSharedFiles().then(function(files){
+    if(files && files.length){
+      try{ history.replaceState(null, "", location.pathname); }catch(e){}
+      handleFiles(files);
+    }
   });
 
   /* ---------------- init ---------------- */

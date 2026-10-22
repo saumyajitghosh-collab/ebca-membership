@@ -1680,7 +1680,7 @@ footer a:hover{color:var(--gold-2)}
   refresh();
 
   /* service worker (offline support) */
-  if("serviceWorker" in navigator && location.protocol === "https:"){
+  if("serviceWorker" in navigator && window.isSecureContext){
     window.addEventListener("load", function(){
       navigator.serviceWorker.register("sw.js").catch(function(){});
     });
